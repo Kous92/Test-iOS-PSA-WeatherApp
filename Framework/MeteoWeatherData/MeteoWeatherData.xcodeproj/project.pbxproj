@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4B10DFFF29BA51DB003A9DDE /* Endpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B10DFFE29BA51DB003A9DDE /* Endpoints.swift */; };
 		4B1817F729BA4A090028D74A /* MeteoWeatherData.docc in Sources */ = {isa = PBXBuildFile; fileRef = 4B1817F629BA4A090028D74A /* MeteoWeatherData.docc */; };
 		4B1817FD29BA4A090028D74A /* MeteoWeatherData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B1817F229BA4A090028D74A /* MeteoWeatherData.framework */; };
 		4B18180229BA4A090028D74A /* MeteoWeatherDataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B18180129BA4A090028D74A /* MeteoWeatherDataTests.swift */; };
@@ -25,6 +26,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4B10DFFE29BA51DB003A9DDE /* Endpoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoints.swift; sourceTree = "<group>"; };
 		4B1817F229BA4A090028D74A /* MeteoWeatherData.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MeteoWeatherData.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4B1817F529BA4A090028D74A /* MeteoWeatherData.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MeteoWeatherData.h; sourceTree = "<group>"; };
 		4B1817F629BA4A090028D74A /* MeteoWeatherData.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = MeteoWeatherData.docc; sourceTree = "<group>"; };
@@ -76,6 +78,7 @@
 				4B1817F529BA4A090028D74A /* MeteoWeatherData.h */,
 				4B1817F629BA4A090028D74A /* MeteoWeatherData.docc */,
 				4B18180C29BA4A360028D74A /* WeatherData.swift */,
+				4B10DFFE29BA51DB003A9DDE /* Endpoints.swift */,
 			);
 			path = MeteoWeatherData;
 			sourceTree = "<group>";
@@ -198,6 +201,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4B18180D29BA4A360028D74A /* WeatherData.swift in Sources */,
+				4B10DFFF29BA51DB003A9DDE /* Endpoints.swift in Sources */,
 				4B1817F729BA4A090028D74A /* MeteoWeatherData.docc in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
