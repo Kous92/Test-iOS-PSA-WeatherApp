@@ -8,11 +8,11 @@
 import Foundation
 
 public struct GeocodedCity: Decodable {
-    let name: String
-    let localNames: [String: String]?
-    let lat, lon: Double
-    let country: String
-    let state: String?
+    public let name: String
+    public let localNames: [String: String]?
+    public let lat, lon: Double
+    public let country: String
+    public let state: String?
     
     enum CodingKeys: String, CodingKey {
         case localNames = "local_names"

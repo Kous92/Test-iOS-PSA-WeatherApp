@@ -1,5 +1,5 @@
 //
-//  Endpoints.swift
+//  MeteoWeatherDataEndpoint.swift
 //  MeteoWeatherData
 //
 //  Created by Koussaïla Ben Mamar on 09/03/2023.
@@ -9,8 +9,8 @@ import Foundation
 
 enum MeteoWeatherDataEndpoint {
     case geocoding(cityName: String)
-    case currentWeather(lat: String, lon: String)
-    case airPollution(lat: String, lon: String)
+    case currentWeather(lat: Double, lon: Double)
+    case airPollution(lat: Double, lon: Double)
     
     var baseURL: String {
         return "https://api.openweathermap.org"

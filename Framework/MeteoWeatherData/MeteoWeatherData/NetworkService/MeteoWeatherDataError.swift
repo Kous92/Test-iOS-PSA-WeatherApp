@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum MeteoWeatherDataError: String, Error {
+public enum MeteoWeatherDataError: String, Error {
     case parametersMissing = "Erreur 400: Paramètres manquants dans la requête."
     case invalidApiKey = "Erreur 401: La clé d'API fournie est inactive, invalide ou inexistante."
     case notFound = "Erreur 404: Aucun contenu disponible."
