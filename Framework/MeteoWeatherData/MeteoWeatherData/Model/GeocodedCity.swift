@@ -19,3 +19,8 @@ public struct GeocodedCity: Decodable {
         case name, lat, lon, country, state
     }
 }
+
+public struct LocalName: Decodable {
+    public let fr: String?
+    public let en: String?
+}

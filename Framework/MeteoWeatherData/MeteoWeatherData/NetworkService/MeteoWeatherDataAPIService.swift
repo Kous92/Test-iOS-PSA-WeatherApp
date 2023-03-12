@@ -9,6 +9,8 @@ import Foundation
 
 public protocol MeteoWeatherDataAPIService {
     func fetchGeocodedCity(query: String) async -> Result<[GeocodedCity], MeteoWeatherDataError>
-    func fetchCurrentCityWeather(lon: Double, lat: Double) async -> Result<CityCurrentWeather, MeteoWeatherDataError>
-    func fetchAirPollution(lon: Double, lat: Double) async -> Result<AirPollution, MeteoWeatherDataError>
+    func fetchCurrentCityWeather(lat: Double, lon: Double) async -> Result<CityCurrentWeather, MeteoWeatherDataError>
+    
+    func fetchGeocodedCity(query: String, completion: @escaping (Result<CityCurrentWeather, MeteoWeatherDataError>) -> ())
+    func fetchCurrentCityWeather(lat: Double, lon: Double, completion: @escaping (Result<CityCurrentWeather, MeteoWeatherDataError>) -> ())
 }

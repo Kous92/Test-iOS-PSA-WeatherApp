@@ -16,41 +16,6 @@ public class WeatherData {
         return ["Paris", "Londres", "Madrid", "Monaco", "Rome", "Alger", "Abu Dhabi", "New York", "Tokyo"]
     }
     
-    public func testDecodingAirPollution() -> AirPollution {
-        let json =
-        """
-        {
-            "coord": {
-                "lon": 2.4385,
-                "lat": 48.9464
-            },
-            "list": [
-                {
-                    "main": {
-                        "aqi": 1
-                    },
-                    "components": {
-                        "co": 273.71,
-                        "no": 0.58,
-                        "no2": 12.17,
-                        "o3": 50.07,
-                        "so2": 2.92,
-                        "pm2_5": 3.52,
-                        "pm10": 4.37,
-                        "nh3": 2.15
-                    },
-                    "dt": 1678373013
-                }
-            ]
-        }
-        """.data(using: .utf8)
-        
-        let decoder = JSONDecoder()
-        let data = try! decoder.decode(AirPollution.self, from: json!)
-        
-        return data
-    }
-    
     public func testDecodingGeocodedCity() -> [GeocodedCity] {
         let json =
         """
@@ -456,4 +421,161 @@ public class WeatherData {
         
         return data
     }
+    
+    /*
+    private func geocodeCity(with name: String) {
+        Task {
+            print("Géocodage de la ville de \(name)")
+            let geocodedOutput = await service.fetchGeocodedCity(query: name)
+            
+            switch geocodedOutput {
+                case .success(let geocoded):
+                    let geo = geocoded.compactMap { city in
+                        let name = city.localNames?["fr"] ?? city.name
+                        let country = city.country
+                        let state = city.state
+                        
+                        if let state {
+                            return "\(name), \(state), \(country)"
+                        }
+                        
+                        return "\(name)\(country)"
+                    }
+                    
+                    print(geo)
+                case .failure(let error):
+                    print(error.rawValue)
+            }
+        }
+    }
+    
+    private func forwardGeocodeCity(with name: String) {
+        lazy var geocoder = CLGeocoder()
+        
+        geocoder.geocodeAddressString(name) { placemarks, error in
+            guard error == nil else {
+                print("Géocodage impossible, erreur: \(error?.localizedDescription ?? "")")
+                return
+            }
+            
+            guard let placemarks else {
+                print("Géocodage impossible (placemark)")
+                return
+            }
+            
+            let places = placemarks.compactMap { $0 }
+            print(places)
+        }
+    }
+    
+    private func forwardGeocodeCity2(with name: String) {
+        lazy var geocoder = CLGeocoder()
+        
+        let mkRequest = MKLocalSearch.Request()
+        mkRequest.naturalLanguageQuery = name
+        let localSearch = MKLocalSearch(request: mkRequest)
+        localSearch.start { response, error in
+            guard error == nil else {
+                print("Recherche impossible: \(error!.localizedDescription)")
+                return
+            }
+            
+            guard let mapItems = response?.mapItems else {
+                print("Aucun lieu trouvé")
+                return
+            }
+            
+            for place in mapItems {
+                print(place)
+            }
+        }
+        
+        geocoder.geocodeAddressString(name, in: nil, preferredLocale: Locale(identifier: "fr-FR")) { placemarks, error in
+            guard error == nil else {
+                print("Géocodage impossible, erreur: \(error?.localizedDescription ?? "")")
+                return
+            }
+            
+            guard let placemarks else {
+                print("Géocodage impossible (placemark)")
+                return
+            }
+            
+            let places = placemarks.compactMap { $0 }
+            print(places)
+        }
+    }
+    
+    private func fetchWeather(with geocodedCity: GeocodedCity) async -> CityCurrentWeather {
+        print("Étape 2: Récupération des conditions météo de la ville de \(city)")
+        let cityWeatherOutput = await service.fetchCurrentCityWeather(lat: geocodedCity.lat, lon: geocodedCity.lon)
+        
+        switch cityWeatherOutput {
+            case .success(let weather):
+                print(weather)
+                return weather
+            case .failure(let error):
+                fatalError(error.rawValue)
+        }
+    }
+    
+    @MainActor private func fetchWeather() async {
+        print("Étape 2: Récupération des conditions météo de la ville de \(city)")
+        
+        let cityWeatherOutput = await service.fetchCurrentCityWeather(lat: 48.8588897, lon: 2.3200410217200766)
+        
+        switch cityWeatherOutput {
+            case .success(let weather):
+                print(weather)
+            case .failure(let error):
+                print(error.rawValue)
+        }
+    }
+    
+    /*
+    private func fetchAirPollution(with geocodedCity: GeocodedCity) async -> AirPollution {
+        print("Étape 3: Récupération de la qualité de l'air de la ville de \(city)")
+        
+        let airPollutionOutput = await service.fetchAirPollution(lon: 2.3200410217200766, lat: 48.8588897)
+        
+        switch airPollutionOutput {
+            case .success(let airPollution):
+                print(airPollution)
+                return airPollution
+            case .failure(let error):
+                print(error.rawValue)
+                fatalError(error.rawValue)
+        }
+    }
+     */
+    
+    private func fetchCityAndSave(name: String) {
+        Task {
+            print("Étape 1: Géocodage de la ville de \(name)")
+            let geocodedOutput = await service.fetchGeocodedCity(query: name)
+            
+            switch geocodedOutput {
+                case .success(let geocoded):
+                    print(geocoded)
+                    let cityWeatherOutput = await fetchWeather(with: geocoded[0])
+                    print(cityWeatherOutput)
+                    print("\n")
+                    // let airPollutionOutput = await fetchAirPollution(with: geocoded[0])
+                    // print(airPollutionOutput)
+                    print("\n")
+                    print("Étape 4: Sauvegarde des données téléchargées vers la base Core Data")
+                    await MeteoWeatherCoreDataService.shared.saveCityWeatherData(geocodedCity: geocoded[0], currentWeather: cityWeatherOutput)
+                    print("Étape 5: Vérification de l'existence des données")
+                    
+                    DispatchQueue.main.async {
+                        print(MeteoWeatherCoreDataService.shared.checkSavedCities())
+                        MeteoWeatherCoreDataService.shared.fetchCityWeather()
+                    }
+
+                case .failure(let error):
+                    print(error.rawValue)
+            }
+        }
+    }
+     */
 }
