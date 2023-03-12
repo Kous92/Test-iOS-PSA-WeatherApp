@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4B1CE2B929BDDF4600B76C6F /* AddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B1CE2B829BDDF4600B76C6F /* AddViewController.swift */; };
+		4B1CE2BD29BE046F00B76C6F /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B1CE2BC29BE046F00B76C6F /* DetailViewController.swift */; };
 		4B1CFF3829B9F00C007391E5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B1CFF3729B9F00C007391E5 /* AppDelegate.swift */; };
 		4B1CFF3A29B9F00C007391E5 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B1CFF3929B9F00C007391E5 /* SceneDelegate.swift */; };
 		4B1CFF3C29B9F00C007391E5 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B1CFF3B29B9F00C007391E5 /* ViewController.swift */; };
@@ -34,6 +36,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4B1CE2B829BDDF4600B76C6F /* AddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddViewController.swift; sourceTree = "<group>"; };
+		4B1CE2BC29BE046F00B76C6F /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		4B1CFF3429B9F00C007391E5 /* MeteoWeather.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MeteoWeather.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4B1CFF3729B9F00C007391E5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4B1CFF3929B9F00C007391E5 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -81,6 +85,8 @@
 				4B1CFF3729B9F00C007391E5 /* AppDelegate.swift */,
 				4B1CFF3929B9F00C007391E5 /* SceneDelegate.swift */,
 				4B1CFF3B29B9F00C007391E5 /* ViewController.swift */,
+				4B1CE2B829BDDF4600B76C6F /* AddViewController.swift */,
+				4B1CE2BC29BE046F00B76C6F /* DetailViewController.swift */,
 				4B1CFF3D29B9F00C007391E5 /* Main.storyboard */,
 				4B1CFF4029B9F00D007391E5 /* Assets.xcassets */,
 				4B1CFF4229B9F00D007391E5 /* LaunchScreen.storyboard */,
@@ -201,6 +207,8 @@
 			files = (
 				4B1CFF3C29B9F00C007391E5 /* ViewController.swift in Sources */,
 				4B1CFF3829B9F00C007391E5 /* AppDelegate.swift in Sources */,
+				4B1CE2BD29BE046F00B76C6F /* DetailViewController.swift in Sources */,
+				4B1CE2B929BDDF4600B76C6F /* AddViewController.swift in Sources */,
 				4B1CFF3A29B9F00C007391E5 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

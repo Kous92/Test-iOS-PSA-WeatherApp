@@ -18,16 +18,21 @@ public final class MeteoWeatherDataNetworkAPIService: MeteoWeatherDataAPIService
         await getRequest(endpoint: .geocoding(cityName: query))
     }
     
-    public func fetchCurrentCityWeather(lon: Double, lat: Double) async -> Result<CityCurrentWeather, MeteoWeatherDataError> {
+    public func fetchCurrentCityWeather(lat: Double, lon: Double) async -> Result<CityCurrentWeather, MeteoWeatherDataError> {
         await getRequest(endpoint: .currentWeather(lat: lat, lon: lon))
     }
     
-    public func fetchAirPollution(lon: Double, lat: Double) async -> Result<AirPollution, MeteoWeatherDataError> {
-        await getRequest(endpoint: .airPollution(lat: lat, lon: lon))
+    public func fetchGeocodedCity(query: String, completion: @escaping (Result<CityCurrentWeather, MeteoWeatherDataError>) -> ()) {
+        getRequest(endpoint: .geocoding(cityName: query), completion: completion)
+    }
+    
+    public func fetchCurrentCityWeather(lat: Double, lon: Double, completion: @escaping (Result<CityCurrentWeather, MeteoWeatherDataError>) -> ()) {
+        getRequest(endpoint: .currentWeather(lat: lat, lon: lon), completion: completion)
     }
     
     private func getRequest<T: Decodable>(endpoint: MeteoWeatherDataEndpoint) async -> Result<T, MeteoWeatherDataError> {
-        guard let url = URL(string: endpoint.baseURL + endpoint.path + "&appId=\(apiKey)") else {
+        guard let encodedUrlString = encodeURL(with: endpoint.baseURL + endpoint.path + "&appId=\(apiKey)"),
+              let url = URL(string: encodedUrlString) else {
             print("URL invalide.")
             return .failure(.invalidURL)
         }
@@ -48,7 +53,6 @@ public final class MeteoWeatherDataNetworkAPIService: MeteoWeatherDataAPIService
             
             print("Code: \(httpResponse.statusCode)")
             let decoder = JSONDecoder()
-            decoder.keyDecodingStrategy = .convertFromSnakeCase
             
             do {
                 var outputData: T
@@ -62,6 +66,59 @@ public final class MeteoWeatherDataNetworkAPIService: MeteoWeatherDataAPIService
         }
         
         return .failure(.unknown)
+    }
+    
+    private func getRequest<T: Decodable>(endpoint: MeteoWeatherDataEndpoint, completion: @escaping (Result<T, MeteoWeatherDataError>) -> ()) {
+        guard let encodedUrlString = encodeURL(with: endpoint.baseURL + endpoint.path + "&appId=\(apiKey)"),
+              let url = URL(string: encodedUrlString) else {
+            print("URL invalide.")
+            completion(.failure(.invalidURL))
+            return
+        }
+        
+        let dataTask = URLSession.shared.dataTask(with: url) { data, response, error in
+            if let error {
+                completion(.failure(.networkError))
+                print("DataTask error: \(error.localizedDescription)")
+                
+                return
+            }
+            
+            guard let httpResponse = response as? HTTPURLResponse else {
+                print("Erreur: Pas de réponse du serveur.")
+                completion(.failure(.apiError))
+                return
+            }
+            
+            guard httpResponse.statusCode == 200 else {
+                print("Erreur code \(httpResponse.statusCode).")
+                completion(.failure(self.getErrorMessage(with: httpResponse.statusCode)))
+                return
+            }
+            
+            guard let data else {
+                print("Données indisponibles")
+                completion(.failure(.apiError))
+                return
+            }
+            
+            print("Code: \(httpResponse.statusCode)")
+            
+            do {
+                // Parse the data
+                let decoder = JSONDecoder()
+                let jsonData = try decoder.decode(T.self, from: data)
+                
+                // Back to the main thread
+                DispatchQueue.main.async {
+                    completion(.success(jsonData))
+                }
+            } catch let error {
+                print("Erreur: Le décodage a échoué. \(error.localizedDescription)")
+                completion(.failure(.decodeError))
+            }
+        }
+        dataTask.resume()
     }
     
     private func getErrorMessage(with code: Int) -> MeteoWeatherDataError {
@@ -81,5 +138,9 @@ public final class MeteoWeatherDataNetworkAPIService: MeteoWeatherDataAPIService
         }
         
         return errorMessage
+    }
+    
+    private func encodeURL(with string: String) -> String? {
+        return string.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
     }
 }

@@ -8,17 +8,20 @@
 
 /* Begin PBXBuildFile section */
 		4B10DFFF29BA51DB003A9DDE /* MeteoWeatherDataEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B10DFFE29BA51DB003A9DDE /* MeteoWeatherDataEndpoint.swift */; };
-		4B10E00329BA5527003A9DDE /* AirPollutionData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B10E00229BA5527003A9DDE /* AirPollutionData.swift */; };
 		4B1817F729BA4A090028D74A /* MeteoWeatherData.docc in Sources */ = {isa = PBXBuildFile; fileRef = 4B1817F629BA4A090028D74A /* MeteoWeatherData.docc */; };
 		4B1817FD29BA4A090028D74A /* MeteoWeatherData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B1817F229BA4A090028D74A /* MeteoWeatherData.framework */; };
 		4B18180229BA4A090028D74A /* MeteoWeatherDataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B18180129BA4A090028D74A /* MeteoWeatherDataTests.swift */; };
 		4B18180329BA4A090028D74A /* MeteoWeatherData.h in Headers */ = {isa = PBXBuildFile; fileRef = 4B1817F529BA4A090028D74A /* MeteoWeatherData.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4B18180D29BA4A360028D74A /* WeatherData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B18180C29BA4A360028D74A /* WeatherData.swift */; };
-		4B9FEBF629BB379A004EA2A0 /* MeteoWeatherDataError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B9FEBF529BB379A004EA2A0 /* MeteoWeatherDataError.swift */; };
+		4B94A71129BD04370041E78D /* MeteoWeatherDataRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B94A71029BD04370041E78D /* MeteoWeatherDataRepository.swift */; };
+		4B94A71329BD3D690041E78D /* MeteoWeatherDataError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B94A71229BD3D690041E78D /* MeteoWeatherDataError.swift */; };
 		4B9FEBF929BB392B004EA2A0 /* MeteoWeatherDataAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B9FEBF829BB392B004EA2A0 /* MeteoWeatherDataAPIService.swift */; };
 		4B9FEBFB29BB3C85004EA2A0 /* MeteoWeatherDataNetworkAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B9FEBFA29BB3C85004EA2A0 /* MeteoWeatherDataNetworkAPIService.swift */; };
 		4BCA5AE529BAAB3200181D87 /* GeocodedCity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BCA5AE429BAAB3200181D87 /* GeocodedCity.swift */; };
 		4BCA5AE729BAAECF00181D87 /* CityCurrentWeather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BCA5AE629BAAECF00181D87 /* CityCurrentWeather.swift */; };
+		4BF9FA3F29BBAF9100436510 /* MeteoWeatherCoreDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4BF9FA3D29BBAF9100436510 /* MeteoWeatherCoreDataModel.xcdatamodeld */; };
+		4BF9FA4129BBB1B900436510 /* MeteoWeatherCoreDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BF9FA4029BBB1B900436510 /* MeteoWeatherCoreDataService.swift */; };
+		4BF9FA4329BBFD1300436510 /* MeteoWeatherLocalService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BF9FA4229BBFD1300436510 /* MeteoWeatherLocalService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -33,18 +36,21 @@
 
 /* Begin PBXFileReference section */
 		4B10DFFE29BA51DB003A9DDE /* MeteoWeatherDataEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeteoWeatherDataEndpoint.swift; sourceTree = "<group>"; };
-		4B10E00229BA5527003A9DDE /* AirPollutionData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AirPollutionData.swift; sourceTree = "<group>"; };
 		4B1817F229BA4A090028D74A /* MeteoWeatherData.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MeteoWeatherData.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4B1817F529BA4A090028D74A /* MeteoWeatherData.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MeteoWeatherData.h; sourceTree = "<group>"; };
 		4B1817F629BA4A090028D74A /* MeteoWeatherData.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = MeteoWeatherData.docc; sourceTree = "<group>"; };
 		4B1817FC29BA4A090028D74A /* MeteoWeatherDataTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MeteoWeatherDataTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4B18180129BA4A090028D74A /* MeteoWeatherDataTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeteoWeatherDataTests.swift; sourceTree = "<group>"; };
 		4B18180C29BA4A360028D74A /* WeatherData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherData.swift; sourceTree = "<group>"; };
-		4B9FEBF529BB379A004EA2A0 /* MeteoWeatherDataError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeteoWeatherDataError.swift; sourceTree = "<group>"; };
+		4B94A71029BD04370041E78D /* MeteoWeatherDataRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeteoWeatherDataRepository.swift; sourceTree = "<group>"; };
+		4B94A71229BD3D690041E78D /* MeteoWeatherDataError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeteoWeatherDataError.swift; sourceTree = "<group>"; };
 		4B9FEBF829BB392B004EA2A0 /* MeteoWeatherDataAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeteoWeatherDataAPIService.swift; sourceTree = "<group>"; };
 		4B9FEBFA29BB3C85004EA2A0 /* MeteoWeatherDataNetworkAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeteoWeatherDataNetworkAPIService.swift; sourceTree = "<group>"; };
 		4BCA5AE429BAAB3200181D87 /* GeocodedCity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeocodedCity.swift; sourceTree = "<group>"; };
 		4BCA5AE629BAAECF00181D87 /* CityCurrentWeather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityCurrentWeather.swift; sourceTree = "<group>"; };
+		4BF9FA3E29BBAF9100436510 /* MeteoWeatherCoreDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MeteoWeatherCoreDataModel.xcdatamodel; sourceTree = "<group>"; };
+		4BF9FA4029BBB1B900436510 /* MeteoWeatherCoreDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeteoWeatherCoreDataService.swift; sourceTree = "<group>"; };
+		4BF9FA4229BBFD1300436510 /* MeteoWeatherLocalService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeteoWeatherLocalService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,7 +75,6 @@
 		4B10E00129BA54E2003A9DDE /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				4B10E00229BA5527003A9DDE /* AirPollutionData.swift */,
 				4BCA5AE429BAAB3200181D87 /* GeocodedCity.swift */,
 				4BCA5AE629BAAECF00181D87 /* CityCurrentWeather.swift */,
 			);
@@ -99,9 +104,12 @@
 			children = (
 				4B1817F529BA4A090028D74A /* MeteoWeatherData.h */,
 				4B1817F629BA4A090028D74A /* MeteoWeatherData.docc */,
-				4B9FEBF729BB3919004EA2A0 /* NetworkService */,
-				4B18180C29BA4A360028D74A /* WeatherData.swift */,
 				4B10E00129BA54E2003A9DDE /* Model */,
+				4BF9FA3C29BBAF0700436510 /* LocalService */,
+				4B9FEBF729BB3919004EA2A0 /* NetworkService */,
+				4B94A70F29BD04180041E78D /* DataRepository */,
+				4B18180C29BA4A360028D74A /* WeatherData.swift */,
+				4B94A71229BD3D690041E78D /* MeteoWeatherDataError.swift */,
 			);
 			path = MeteoWeatherData;
 			sourceTree = "<group>";
@@ -114,15 +122,32 @@
 			path = MeteoWeatherDataTests;
 			sourceTree = "<group>";
 		};
+		4B94A70F29BD04180041E78D /* DataRepository */ = {
+			isa = PBXGroup;
+			children = (
+				4B94A71029BD04370041E78D /* MeteoWeatherDataRepository.swift */,
+			);
+			path = DataRepository;
+			sourceTree = "<group>";
+		};
 		4B9FEBF729BB3919004EA2A0 /* NetworkService */ = {
 			isa = PBXGroup;
 			children = (
 				4B10DFFE29BA51DB003A9DDE /* MeteoWeatherDataEndpoint.swift */,
 				4B9FEBF829BB392B004EA2A0 /* MeteoWeatherDataAPIService.swift */,
 				4B9FEBFA29BB3C85004EA2A0 /* MeteoWeatherDataNetworkAPIService.swift */,
-				4B9FEBF529BB379A004EA2A0 /* MeteoWeatherDataError.swift */,
 			);
 			path = NetworkService;
+			sourceTree = "<group>";
+		};
+		4BF9FA3C29BBAF0700436510 /* LocalService */ = {
+			isa = PBXGroup;
+			children = (
+				4BF9FA3D29BBAF9100436510 /* MeteoWeatherCoreDataModel.xcdatamodeld */,
+				4BF9FA4029BBB1B900436510 /* MeteoWeatherCoreDataService.swift */,
+				4BF9FA4229BBFD1300436510 /* MeteoWeatherLocalService.swift */,
+			);
+			path = LocalService;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -235,10 +260,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				4B18180D29BA4A360028D74A /* WeatherData.swift in Sources */,
-				4B9FEBF629BB379A004EA2A0 /* MeteoWeatherDataError.swift in Sources */,
-				4B10E00329BA5527003A9DDE /* AirPollutionData.swift in Sources */,
+				4BF9FA4129BBB1B900436510 /* MeteoWeatherCoreDataService.swift in Sources */,
+				4BF9FA4329BBFD1300436510 /* MeteoWeatherLocalService.swift in Sources */,
+				4B94A71329BD3D690041E78D /* MeteoWeatherDataError.swift in Sources */,
 				4B10DFFF29BA51DB003A9DDE /* MeteoWeatherDataEndpoint.swift in Sources */,
+				4BF9FA3F29BBAF9100436510 /* MeteoWeatherCoreDataModel.xcdatamodeld in Sources */,
 				4BCA5AE729BAAECF00181D87 /* CityCurrentWeather.swift in Sources */,
+				4B94A71129BD04370041E78D /* MeteoWeatherDataRepository.swift in Sources */,
 				4B9FEBFB29BB3C85004EA2A0 /* MeteoWeatherDataNetworkAPIService.swift in Sources */,
 				4BCA5AE529BAAB3200181D87 /* GeocodedCity.swift in Sources */,
 				4B9FEBF929BB392B004EA2A0 /* MeteoWeatherDataAPIService.swift in Sources */,
@@ -508,6 +536,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		4BF9FA3D29BBAF9100436510 /* MeteoWeatherCoreDataModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				4BF9FA3E29BBAF9100436510 /* MeteoWeatherCoreDataModel.xcdatamodel */,
+			);
+			currentVersion = 4BF9FA3E29BBAF9100436510 /* MeteoWeatherCoreDataModel.xcdatamodel */;
+			path = MeteoWeatherCoreDataModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 4B1817E929BA4A090028D74A /* Project object */;
 }
