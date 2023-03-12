@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  ListViewController.swift
 //  MeteoWeather
 //
 //  Created by Koussaïla Ben Mamar on 09/03/2023.
@@ -15,7 +15,7 @@ protocol AddDataDelegate: AnyObject {
     func updateData()
 }
 
-class ViewController: UIViewController, AddDataDelegate {
+class ListViewController: UIViewController, AddDataDelegate {
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -122,7 +122,7 @@ class ViewController: UIViewController, AddDataDelegate {
     }
 }
 
-extension ViewController: UITableViewDelegate {
+extension ListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print("Ouvrir la vue détail pour afficher toute la météo.")
         guard let detailViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "DetailViewController") as? DetailViewController else {
@@ -134,18 +134,17 @@ extension ViewController: UITableViewDelegate {
     }
 }
 
-extension ViewController: UITableViewDataSource {
+extension ListViewController: UITableViewDataSource {
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return cities.count
     }
     
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "weatherCell", for: indexPath) as? CityWeatherTableViewCell else {
+            return UITableViewCell()
+        }
         
-        var place = (cities[indexPath.row].name ?? "??") + " (\(cities[indexPath.row].country ?? "??")): "
-        place += "\(cities[indexPath.row].temperature)°C"
-        
-        cell.textLabel?.text = place
+        cell.configure(with: cities[indexPath.row])
         
         return cell
     }
