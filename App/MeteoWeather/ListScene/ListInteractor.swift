@@ -19,6 +19,14 @@ final class ListInteractor: ListDataStore {
 }
 
 extension ListInteractor: ListBusinessLogic {
+    func deleteCity(request: ListEntity.DeleteCity.Request) {
+        print("2) [List] Interactor: Lancement de l'appel API depuis le Worker.")
+        worker.deleteCityData(request: request) { [weak self] response in
+            print("5) [List] Interactor -> Presenter: Réponse récupérée, notification du Presenter")
+            self?.presenter?.notifyDeletion(response: response)
+        }
+    }
+    
     func fetchCities() {
         print("2) [List] Interactor: Lancement de l'appel API depuis le Worker.")
         worker.fetchCitiesData { [weak self] response in

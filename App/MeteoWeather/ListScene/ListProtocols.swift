@@ -11,16 +11,19 @@ import Foundation
 protocol ListDisplayLogic: AnyObject {
     func updateCityList(with viewModel: ListEntity.ViewModel)
     func displayErrorMessage(with viewModel: ListEntity.ViewModel.Error)
+    func completeDeletion(at indexPath: IndexPath)
 }
 
 // View -> Interactor
 protocol ListBusinessLogic: AnyObject {
     func fetchCities()
+    func deleteCity(request: ListEntity.DeleteCity.Request)
 }
 
 // Interactor -> Presenter
 protocol ListPresentationLogic: AnyObject {
     func presentCities(response: ListEntity.Response)
+    func notifyDeletion(response: ListEntity.DeleteCity.Response)
 }
 
 // View -> Router

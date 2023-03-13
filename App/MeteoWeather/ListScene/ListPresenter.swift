@@ -31,4 +31,16 @@ extension ListPresenter: ListPresentationLogic {
                 view?.displayErrorMessage(with: ListEntity.ViewModel.Error(message: error.rawValue))
         }
     }
+    
+    func notifyDeletion(response: ListEntity.DeleteCity.Response) {
+        print("[List] 6) Presenter -> View: Notification de la vue pour mise à jour avec la réponse.")
+        switch response.result {
+            case .success(let index):
+                print("-> 6.1) Presenter -> View: Notification de la vue avec les vues modèles.")
+                view?.completeDeletion(at: index)
+            case .failure(let error):
+                print("-> 6.1) Presenter -> View: Notification de la vue d'une erreur.")
+                view?.displayErrorMessage(with: ListEntity.ViewModel.Error(message: error.rawValue))
+        }
+    }
 }

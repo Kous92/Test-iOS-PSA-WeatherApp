@@ -24,6 +24,20 @@ final class ListWorker {
         }
     }
     
+    func deleteCityData(request: ListEntity.DeleteCity.Request, completion: @escaping (_ response: ListEntity.DeleteCity.Response) -> ()) {
+        print("3) [List] Worker: Lancement de la suppression des données de \(request.name).")
+        repository.deleteCity(with: request.name) { result in
+            switch result {
+                case .success():
+                    print("-> 4.1) [List] Suppression terminée de \(request.name).")
+                    completion(ListEntity.DeleteCity.Response(result: .success(request.index)))
+                case .failure(let error):
+                    print("-> 4.1) [List] Échec: une erreur est survenue.")
+                    completion(ListEntity.DeleteCity.Response(result: .failure(error)))
+            }
+        }
+    }
+    
     private func handleResult(with result: Result<[CityCurrentWeatherEntity], MeteoWeatherDataError>) -> ListEntity.Response {
         print("4) [List] Worker: Renvoi de la réponse à l'Interactor.")
         switch result {

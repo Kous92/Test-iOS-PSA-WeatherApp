@@ -120,7 +120,8 @@
 			children = (
 				4B1CE2BC29BE046F00B76C6F /* DetailViewController.swift */,
 			);
-			path = DetailScene;
+			name = DetailScene;
+			path = ../../Framework/MeteoWeatherData/MeteoWeatherDataTests/DetailScene;
 			sourceTree = "<group>";
 		};
 		4B1CFF2B29B9F00C007391E5 = {
