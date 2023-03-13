@@ -8,7 +8,8 @@
 import Foundation
 import UIKit
 
-final class ListRouter: ListRoutingLogic, ListDataPassing {
+final class ListRouter: ListRoutingLogic, ListDataPassing, AddDataDelegate {
+    
     weak var view: ListViewController?
     var dataStore: ListDataStore?
     
@@ -18,12 +19,14 @@ final class ListRouter: ListRoutingLogic, ListDataPassing {
     
     func showAddView() {
         guard let addViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "AddViewController") as? AddViewController,
-            let listViewController = view
+            let listViewController = view,
+            let addRouter = addViewController.router as? AddRouter
         else {
             fatalError("La vue pour ajouter des villes n'est pas disponible !")
         }
         
         addViewController.updateDelegate = listViewController
+        addRouter.addDelegate = self
         navigateToAddView(source: listViewController, destination: addViewController)
     }
     
@@ -33,5 +36,14 @@ final class ListRouter: ListRoutingLogic, ListDataPassing {
     
     private func navigateToAddView(source: ListViewController, destination: AddViewController) {
         source.navigationController?.present(destination, animated: true)
+    }
+    
+    // Delegate method
+    func updateCityList() {
+        updateFromAddView()
+    }
+    
+    func updateFromAddView() {
+        view?.updateCityList()
     }
 }

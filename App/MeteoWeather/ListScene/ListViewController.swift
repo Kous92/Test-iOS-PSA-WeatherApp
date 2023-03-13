@@ -10,16 +10,12 @@ import MeteoWeatherData
 import MapKit
 import CoreLocation
 
-protocol AddDataDelegate: AnyObject {
-    func updateData()
-}
-
-class ListViewController: UIViewController, AddDataDelegate {
+final class ListViewController: UIViewController, AddDataDelegate {
     
     @IBOutlet weak var tableView: UITableView!
     
     private var interactor: ListBusinessLogic?
-    private var router: (ListRoutingLogic & ListDataPassing)?
+    var router: (ListRoutingLogic & ListDataPassing)?
     private var viewModels = [ListEntity.ViewModel.CityViewModel]()
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
@@ -53,25 +49,15 @@ class ListViewController: UIViewController, AddDataDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         setViews()
-        updateData()
+        updateCityList()
     }
     
     @IBAction func addNewCity(_ sender: Any) {
         print("AddCityVC")
-        
         router?.showAddView()
-        
-        /*
-        guard let addViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "AddViewController") as? AddViewController else {
-            fatalError("La vue pour ajouter des villes n'est pas disponible !")
-        }
-        
-        addViewController.updateDelegate = self
-        self.navigationController?.present(addViewController, animated: true)
-         */
     }
     
-    func updateData() {
+    func updateCityList() {
         print("Update list")
         interactor?.fetchCities()
     }
@@ -108,9 +94,11 @@ extension ListViewController: ListDisplayLogic {
 extension ListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print("Ouvrir la vue détail pour afficher toute la météo.")
+        /*
         guard let detailViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "DetailViewController") as? DetailViewController else {
             fatalError("La vue détail n'est pas disponible !")
         }
+         */
         
         // detailViewController.cityWeather = cities[indexPath.row]
         // self.navigationController?.pushViewController(detailViewController, animated: true)

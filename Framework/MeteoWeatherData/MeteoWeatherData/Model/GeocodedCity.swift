@@ -18,9 +18,13 @@ public struct GeocodedCity: Decodable {
         case localNames = "local_names"
         case name, lat, lon, country, state
     }
-}
-
-public struct LocalName: Decodable {
-    public let fr: String?
-    public let en: String?
+    
+    public init(name: String, localNames: [String : String]?, lat: Double, lon: Double, country: String, state: String?) {
+        self.name = name
+        self.localNames = localNames
+        self.lat = lat
+        self.lon = lon
+        self.country = country
+        self.state = state
+    }
 }

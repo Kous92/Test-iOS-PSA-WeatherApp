@@ -25,6 +25,10 @@ public class MeteoWeatherDataRepository {
         return await networkService.fetchGeocodedCity(query: query)
     }
     
+    public func searchCity(with query: String, completion: @escaping (Result<[GeocodedCity], MeteoWeatherDataError>) -> ()) {
+        networkService?.fetchGeocodedCity(query: query, completion: completion)
+    }
+    
     // Returns localized city name if available or default name
     private func getCityName(with geocodedCity: GeocodedCity) -> String {
         return geocodedCity.localNames?["fr"] ?? geocodedCity.name

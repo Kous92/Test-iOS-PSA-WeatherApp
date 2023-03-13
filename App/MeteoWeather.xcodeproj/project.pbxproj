@@ -25,6 +25,13 @@
 		4B26653429BE790500A42A52 /* ListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B26653329BE790500A42A52 /* ListPresenter.swift */; };
 		4B26653629BE791A00A42A52 /* ListRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B26653529BE791A00A42A52 /* ListRouter.swift */; };
 		4B26653829BE792200A42A52 /* ListWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B26653729BE792200A42A52 /* ListWorker.swift */; };
+		4BEEA77C29BF4E5700B6F6BC /* AddProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BEEA77B29BF4E5700B6F6BC /* AddProtocols.swift */; };
+		4BEEA78029BF4EAD00B6F6BC /* AddPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BEEA77F29BF4EAD00B6F6BC /* AddPresenter.swift */; };
+		4BEEA78229BF4EB500B6F6BC /* AddRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BEEA78129BF4EB500B6F6BC /* AddRouter.swift */; };
+		4BEEA78429BF4EBF00B6F6BC /* AddInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BEEA78329BF4EBF00B6F6BC /* AddInteractor.swift */; };
+		4BEEA78629BF59BB00B6F6BC /* AddWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BEEA78529BF59BB00B6F6BC /* AddWorker.swift */; };
+		4BEEA78829BF59C900B6F6BC /* AddModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BEEA78729BF59C900B6F6BC /* AddModels.swift */; };
+		4BEEA78A29BF627500B6F6BC /* CitySearchOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BEEA78929BF627500B6F6BC /* CitySearchOutput.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -78,6 +85,13 @@
 		4B26653529BE791A00A42A52 /* ListRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListRouter.swift; sourceTree = "<group>"; };
 		4B26653729BE792200A42A52 /* ListWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListWorker.swift; sourceTree = "<group>"; };
 		4BE1F0A529BA4B22005CD49D /* MeteoWeatherData.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = MeteoWeatherData.xcodeproj; path = ../Framework/MeteoWeatherData/MeteoWeatherData.xcodeproj; sourceTree = "<group>"; };
+		4BEEA77B29BF4E5700B6F6BC /* AddProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProtocols.swift; sourceTree = "<group>"; };
+		4BEEA77F29BF4EAD00B6F6BC /* AddPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPresenter.swift; sourceTree = "<group>"; };
+		4BEEA78129BF4EB500B6F6BC /* AddRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRouter.swift; sourceTree = "<group>"; };
+		4BEEA78329BF4EBF00B6F6BC /* AddInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddInteractor.swift; sourceTree = "<group>"; };
+		4BEEA78529BF59BB00B6F6BC /* AddWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddWorker.swift; sourceTree = "<group>"; };
+		4BEEA78729BF59C900B6F6BC /* AddModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddModels.swift; sourceTree = "<group>"; };
+		4BEEA78929BF627500B6F6BC /* CitySearchOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CitySearchOutput.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,6 +125,12 @@
 			isa = PBXGroup;
 			children = (
 				4B1CE2B829BDDF4600B76C6F /* AddViewController.swift */,
+				4BEEA77B29BF4E5700B6F6BC /* AddProtocols.swift */,
+				4BEEA77F29BF4EAD00B6F6BC /* AddPresenter.swift */,
+				4BEEA78129BF4EB500B6F6BC /* AddRouter.swift */,
+				4BEEA78329BF4EBF00B6F6BC /* AddInteractor.swift */,
+				4BEEA78529BF59BB00B6F6BC /* AddWorker.swift */,
+				4BEEA78729BF59C900B6F6BC /* AddModels.swift */,
 			);
 			path = AddScene;
 			sourceTree = "<group>";
@@ -145,7 +165,7 @@
 		4B1CFF3629B9F00C007391E5 /* MeteoWeather */ = {
 			isa = PBXGroup;
 			children = (
-				4B26652C29BE74F700A42A52 /* Entity */,
+				4B26652C29BE74F700A42A52 /* DataTransferObjects */,
 				4B1CE2C829BE52BD00B76C6F /* DetailScene */,
 				4B1CE2C729BE52B800B76C6F /* AddScene */,
 				4B1CE2C629BE52B100B76C6F /* ListScene */,
@@ -159,12 +179,13 @@
 			path = MeteoWeather;
 			sourceTree = "<group>";
 		};
-		4B26652C29BE74F700A42A52 /* Entity */ = {
+		4B26652C29BE74F700A42A52 /* DataTransferObjects */ = {
 			isa = PBXGroup;
 			children = (
 				4B26652F29BE757400A42A52 /* CityCurrentWeather.swift */,
+				4BEEA78929BF627500B6F6BC /* CitySearchOutput.swift */,
 			);
-			path = Entity;
+			path = DataTransferObjects;
 			sourceTree = "<group>";
 		};
 		4BE1F0A629BA4B22005CD49D /* Products */ = {
@@ -279,16 +300,23 @@
 			buildActionMask = 2147483647;
 			files = (
 				4B26653829BE792200A42A52 /* ListWorker.swift in Sources */,
+				4BEEA78629BF59BB00B6F6BC /* AddWorker.swift in Sources */,
 				4B26653629BE791A00A42A52 /* ListRouter.swift in Sources */,
 				4B26653229BE78F600A42A52 /* ListInteractor.swift in Sources */,
+				4BEEA78829BF59C900B6F6BC /* AddModels.swift in Sources */,
+				4BEEA78A29BF627500B6F6BC /* CitySearchOutput.swift in Sources */,
 				4B1CFF3C29B9F00C007391E5 /* ListViewController.swift in Sources */,
+				4BEEA78229BF4EB500B6F6BC /* AddRouter.swift in Sources */,
 				4B1CE2C229BE35A800B76C6F /* CityWeatherTableViewCell.swift in Sources */,
 				4B1CFF3829B9F00C007391E5 /* AppDelegate.swift in Sources */,
 				4B26653029BE757400A42A52 /* CityCurrentWeather.swift in Sources */,
 				4B1CE2CC29BE533200B76C6F /* ListModels.swift in Sources */,
 				4B1CE2BD29BE046F00B76C6F /* DetailViewController.swift in Sources */,
+				4BEEA78029BF4EAD00B6F6BC /* AddPresenter.swift in Sources */,
+				4BEEA78429BF4EBF00B6F6BC /* AddInteractor.swift in Sources */,
 				4B1CE2CA29BE52F900B76C6F /* ListProtocols.swift in Sources */,
 				4B26653429BE790500A42A52 /* ListPresenter.swift in Sources */,
+				4BEEA77C29BF4E5700B6F6BC /* AddProtocols.swift in Sources */,
 				4B1CE2B929BDDF4600B76C6F /* AddViewController.swift in Sources */,
 				4B1CFF3A29B9F00C007391E5 /* SceneDelegate.swift in Sources */,
 			);
