@@ -8,7 +8,7 @@
 import UIKit
 import MeteoWeatherData
 
-class DetailViewController: UIViewController {
+final class DetailViewController: UIViewController {
     
     var cityWeather: CityCurrentWeatherEntity?
     

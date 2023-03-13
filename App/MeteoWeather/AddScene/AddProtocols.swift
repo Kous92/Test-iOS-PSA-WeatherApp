@@ -31,7 +31,7 @@ protocol AddRoutingLogic: AnyObject {
     func backToListView()
 }
 
-// AddRouter -> ListRouter
+// AddRouter -> ListRouter: Allow to update previous view after completing the data saving
 protocol AddDataDelegate: AnyObject {
     func updateCityList()
 }
