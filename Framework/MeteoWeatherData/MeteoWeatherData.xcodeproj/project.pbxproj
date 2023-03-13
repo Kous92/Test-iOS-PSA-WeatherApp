@@ -12,7 +12,6 @@
 		4B1817FD29BA4A090028D74A /* MeteoWeatherData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B1817F229BA4A090028D74A /* MeteoWeatherData.framework */; };
 		4B18180229BA4A090028D74A /* MeteoWeatherDataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B18180129BA4A090028D74A /* MeteoWeatherDataTests.swift */; };
 		4B18180329BA4A090028D74A /* MeteoWeatherData.h in Headers */ = {isa = PBXBuildFile; fileRef = 4B1817F529BA4A090028D74A /* MeteoWeatherData.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		4B18180D29BA4A360028D74A /* WeatherData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B18180C29BA4A360028D74A /* WeatherData.swift */; };
 		4B94A71129BD04370041E78D /* MeteoWeatherDataRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B94A71029BD04370041E78D /* MeteoWeatherDataRepository.swift */; };
 		4B94A71329BD3D690041E78D /* MeteoWeatherDataError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B94A71229BD3D690041E78D /* MeteoWeatherDataError.swift */; };
 		4B9FEBF929BB392B004EA2A0 /* MeteoWeatherDataAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B9FEBF829BB392B004EA2A0 /* MeteoWeatherDataAPIService.swift */; };
@@ -41,7 +40,6 @@
 		4B1817F629BA4A090028D74A /* MeteoWeatherData.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = MeteoWeatherData.docc; sourceTree = "<group>"; };
 		4B1817FC29BA4A090028D74A /* MeteoWeatherDataTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MeteoWeatherDataTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4B18180129BA4A090028D74A /* MeteoWeatherDataTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeteoWeatherDataTests.swift; sourceTree = "<group>"; };
-		4B18180C29BA4A360028D74A /* WeatherData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherData.swift; sourceTree = "<group>"; };
 		4B94A71029BD04370041E78D /* MeteoWeatherDataRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeteoWeatherDataRepository.swift; sourceTree = "<group>"; };
 		4B94A71229BD3D690041E78D /* MeteoWeatherDataError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeteoWeatherDataError.swift; sourceTree = "<group>"; };
 		4B9FEBF829BB392B004EA2A0 /* MeteoWeatherDataAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeteoWeatherDataAPIService.swift; sourceTree = "<group>"; };
@@ -108,8 +106,6 @@
 				4BF9FA3C29BBAF0700436510 /* LocalService */,
 				4B9FEBF729BB3919004EA2A0 /* NetworkService */,
 				4B94A70F29BD04180041E78D /* DataRepository */,
-				4B18180C29BA4A360028D74A /* WeatherData.swift */,
-				4B94A71229BD3D690041E78D /* MeteoWeatherDataError.swift */,
 			);
 			path = MeteoWeatherData;
 			sourceTree = "<group>";
@@ -126,6 +122,7 @@
 			isa = PBXGroup;
 			children = (
 				4B94A71029BD04370041E78D /* MeteoWeatherDataRepository.swift */,
+				4B94A71229BD3D690041E78D /* MeteoWeatherDataError.swift */,
 			);
 			path = DataRepository;
 			sourceTree = "<group>";
@@ -259,7 +256,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4B18180D29BA4A360028D74A /* WeatherData.swift in Sources */,
 				4BF9FA4129BBB1B900436510 /* MeteoWeatherCoreDataService.swift in Sources */,
 				4BF9FA4329BBFD1300436510 /* MeteoWeatherLocalService.swift in Sources */,
 				4B94A71329BD3D690041E78D /* MeteoWeatherDataError.swift in Sources */,

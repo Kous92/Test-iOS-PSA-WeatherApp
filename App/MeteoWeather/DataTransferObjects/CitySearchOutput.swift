@@ -21,7 +21,7 @@ struct CitySearchOutput {
         self.localNames = geocodedCity.localNames
         self.lat = geocodedCity.lat
         self.lon = geocodedCity.lon
-        self.country = geocodedCity.country
+        self.country = countryName(countryCode: geocodedCity.country) ?? geocodedCity.country
         self.state = geocodedCity.state
     }
     

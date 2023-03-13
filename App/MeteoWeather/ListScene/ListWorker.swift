@@ -12,7 +12,8 @@ final class ListWorker {
     private var repository: MeteoWeatherDataRepository
     
     init() {
-        self.repository = MeteoWeatherDataRepository(networkService: MeteoWeatherDataNetworkAPIService())
+        // Network calls are not needed
+        self.repository = MeteoWeatherDataRepository(networkService: nil, localService: MeteoWeatherCoreDataService.shared)
     }
     
     func fetchCitiesData(completion: @escaping (_ response: ListEntity.Response) -> ()) {

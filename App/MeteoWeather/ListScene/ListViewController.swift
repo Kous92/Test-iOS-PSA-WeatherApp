@@ -6,9 +6,6 @@
 //
 
 import UIKit
-import MeteoWeatherData
-import MapKit
-import CoreLocation
 
 final class ListViewController: UIViewController, AddDataDelegate {
     
@@ -95,14 +92,6 @@ extension ListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print("Ouvrir la vue détail pour afficher toute la météo.")
         router?.showDetailView(at: indexPath)
-        /*
-        guard let detailViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "DetailViewController") as? DetailViewController else {
-            fatalError("La vue détail n'est pas disponible !")
-        }
-         */
-        
-        // detailViewController.cityWeather = cities[indexPath.row]
-        // self.navigationController?.pushViewController(detailViewController, animated: true)
     }
 }
 
