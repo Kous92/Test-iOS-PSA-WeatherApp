@@ -44,3 +44,9 @@ func getDateTimeFromUnixTimestamp(timestamp: String, option: TimeOption) -> Stri
         
     return strDate
 }
+
+// From the ISO code, it gives the country full name.
+func countryName(countryCode: String) -> String? {
+    let current = Locale(identifier: "fr_FR")
+    return current.localizedString(forRegionCode: countryCode)
+}

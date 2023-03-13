@@ -7,8 +7,7 @@
 
 import Foundation
 
-public struct CityCurrentWeather: Codable {
-    let coord: Coord?
+public struct CityCurrentWeather: Decodable {
     let weather: [Weather]?
     let base: String?
     let main: Main?
@@ -19,23 +18,15 @@ public struct CityCurrentWeather: Codable {
     let clouds: Clouds?
     let dt: Int?
     let sys: Sys?
-    let timezone, id: Int?
-    let name: String?
-    let cod: Int?
 }
 
 // MARK: - Clouds
-public struct Clouds: Codable {
+public struct Clouds: Decodable {
     let all: Int?
 }
 
-// MARK: - Coord
-public struct Coord: Codable {
-    let lon, lat: Double?
-}
-
 // MARK: - Main
-public struct Main: Codable {
+public struct Main: Decodable {
     let temp, feelsLike, tempMin, tempMax: Double?
     let pressure, humidity: Int?
 
@@ -49,7 +40,7 @@ public struct Main: Codable {
 }
 
 // MARK: - Rain
-public struct Rain: Codable {
+public struct Rain: Decodable {
     let oneHour: Double?
     let threeHour: Double?
 
@@ -60,7 +51,7 @@ public struct Rain: Codable {
 }
 
 // MARK: - Rain
-public struct Snow: Codable {
+public struct Snow: Decodable {
     let oneHour: Double?
     let threeHour: Double?
 
@@ -71,21 +62,18 @@ public struct Snow: Codable {
 }
 
 // MARK: - Sys
-public struct Sys: Codable {
-    let type, id: Int?
+public struct Sys: Decodable {
     let country: String?
     let sunrise, sunset: Int?
 }
 
 // MARK: - Weather
-public struct Weather: Codable {
-    let id: Int?
-    let main, description, icon: String?
+public struct Weather: Decodable {
+    let description, icon: String?
 }
 
 // MARK: - Wind
-public struct Wind: Codable {
+public struct Wind: Decodable {
     let speed: Double?
-    let deg: Int?
     let gust: Double?
 }

@@ -8,11 +8,8 @@
 import Foundation
 
 public protocol MeteoWeatherLocalService {
-    func saveCityWeatherData(geocodedCity: GeocodedCity, currentWeather: CityCurrentWeather)
-    func checkSavedCities() async -> Int
-    func fetchCity(name: String) -> CityCurrentWeatherEntity
-    func fetchAllCities() -> [CityCurrentWeatherEntity]
-    func asyncFetchAllCities() async -> [CityCurrentWeatherEntity]
-    func deleteCity(city: CityCurrentWeatherEntity)
-    func deleteAllCities() async
+    func checkSavedCity(with name: String) -> CityCurrentWeatherEntity?
+    func saveCityWeatherData(geocodedCity: GeocodedCity, currentWeather: CityCurrentWeather, completion: @escaping (Result<CityCurrentWeatherEntity, MeteoWeatherDataError>) -> ())
+    func fetchAllCities(completion: @escaping (Result<[CityCurrentWeatherEntity], MeteoWeatherDataError>) -> ())
+    func deleteCity(city: CityCurrentWeatherEntity, completion: @escaping (Result<Void, MeteoWeatherDataError>) -> ())
 }

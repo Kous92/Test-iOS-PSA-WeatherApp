@@ -15,6 +15,9 @@ struct CityCurrentWeather {
     let weatherIcon: String
     let weatherDescription: String
     let temperature: Double
+    let feelsLike: Double
+    let tempMin: Double
+    let tempMax: Double
     let lon: Double
     let lat: Double
     let sunset: Int
@@ -28,13 +31,23 @@ struct CityCurrentWeather {
     let threeHourRain: Double
     let oneHourSnow: Double
     let threeHourSnow: Double
+    let lastUpdateTime: Int
     
     init(with city: CityCurrentWeatherEntity) {
         self.name = city.name ?? "Ville inconnue"
-        self.country = city.country ?? "(??)"
+        
+        if let countryCode = city.country, let countryName = countryName(countryCode: countryCode) {
+            self.country = countryName
+        } else {
+            self.country = "??"
+        }
+        
         self.weatherIcon = city.weatherIcon ?? ""
         self.weatherDescription = city.weatherDescription ?? "Aucune description"
         self.temperature = city.temperature
+        self.feelsLike = city.feelsLike
+        self.tempMin = city.tempMin
+        self.tempMax = city.tempMax
         self.lon = city.lon
         self.lat = city.lat
         self.sunset = Int(city.sunset)
@@ -48,6 +61,7 @@ struct CityCurrentWeather {
         self.threeHourRain = city.threeHourRain
         self.oneHourSnow = city.oneHourSnow
         self.threeHourSnow = city.threeHourSnow
+        self.lastUpdateTime = Int(city.lastUpdateTime)
     }
     
     func getCityViewModel() -> ListEntity.ViewModel.CityViewModel {

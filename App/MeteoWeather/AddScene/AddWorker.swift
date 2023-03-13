@@ -12,7 +12,7 @@ final class AddWorker {
     private var repository: MeteoWeatherDataRepository
     
     init() {
-        self.repository = MeteoWeatherDataRepository(networkService: MeteoWeatherDataNetworkAPIService())
+        self.repository = MeteoWeatherDataRepository(networkService: MeteoWeatherDataNetworkAPIService(), localService: MeteoWeatherCoreDataService.shared)
     }
     
     func searchCities(request: AddEntity.SearchCity.Request, completion: @escaping (_ response: AddEntity.SearchCity.Response) -> ()) {
