@@ -48,6 +48,7 @@
 		4B9FEBFA29BB3C85004EA2A0 /* MeteoWeatherDataNetworkAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeteoWeatherDataNetworkAPIService.swift; sourceTree = "<group>"; };
 		4BCA5AE429BAAB3200181D87 /* GeocodedCity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeocodedCity.swift; sourceTree = "<group>"; };
 		4BCA5AE629BAAECF00181D87 /* CityCurrentWeather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityCurrentWeather.swift; sourceTree = "<group>"; };
+		4BEEA77529BF397A00B6F6BC /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		4BF9FA3E29BBAF9100436510 /* MeteoWeatherCoreDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MeteoWeatherCoreDataModel.xcdatamodel; sourceTree = "<group>"; };
 		4BF9FA4029BBB1B900436510 /* MeteoWeatherCoreDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeteoWeatherCoreDataService.swift; sourceTree = "<group>"; };
 		4BF9FA4229BBFD1300436510 /* MeteoWeatherLocalService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeteoWeatherLocalService.swift; sourceTree = "<group>"; };
@@ -118,6 +119,7 @@
 			isa = PBXGroup;
 			children = (
 				4B18180129BA4A090028D74A /* MeteoWeatherDataTests.swift */,
+				4BEEA77629BF397A00B6F6BC /* DetailScene */,
 			);
 			path = MeteoWeatherDataTests;
 			sourceTree = "<group>";
@@ -138,6 +140,14 @@
 				4B9FEBFA29BB3C85004EA2A0 /* MeteoWeatherDataNetworkAPIService.swift */,
 			);
 			path = NetworkService;
+			sourceTree = "<group>";
+		};
+		4BEEA77629BF397A00B6F6BC /* DetailScene */ = {
+			isa = PBXGroup;
+			children = (
+				4BEEA77529BF397A00B6F6BC /* DetailViewController.swift */,
+			);
+			path = DetailScene;
 			sourceTree = "<group>";
 		};
 		4BF9FA3C29BBAF0700436510 /* LocalService */ = {

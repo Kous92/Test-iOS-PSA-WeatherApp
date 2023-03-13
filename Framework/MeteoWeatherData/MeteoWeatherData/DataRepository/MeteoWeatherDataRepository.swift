@@ -35,11 +35,16 @@ public class MeteoWeatherDataRepository {
         if let existingCity = MeteoWeatherCoreDataService.shared.checkSavedCity(with: getCityName(with: geocodedCity)) {
             print("Attention: conflit avec la ville de \(existingCity.name ?? "??")")
             
-            MeteoWeatherCoreDataService.shared.deleteCity(city: existingCity)
-            /*
-            completion(.failure(.apiError))
-            return
-             */
+            MeteoWeatherCoreDataService.shared.deleteCity(city: existingCity) { result in
+                if case .failure(let error) = result {
+                    print("Attention: la ville déjà existante n'a pas pu être supprimée \(existingCity.name ?? "??")")
+                    completion(.failure(error))
+                    
+                    return
+                }
+                
+                print("Mise à jour des données météo de la ville de \(existingCity.name ?? "??")")
+            }
         }
         
         print("-> 2.1: Téléchargement des nouvelles données de \(geocodedCity.name)...")
@@ -63,14 +68,25 @@ public class MeteoWeatherDataRepository {
     
     // Fetches all cities with their respective data, saved locally
     public func fetchAllCities(completion: @escaping (Result<[CityCurrentWeatherEntity], MeteoWeatherDataError>) -> ()) {
-        // return MeteoWeatherCoreDataService.shared.fetchAllCities()
         MeteoWeatherCoreDataService.shared.fetchAllCities(completion: completion)
     }
     
+    /*
     public func deleteCity(with city: CityCurrentWeatherEntity) {
         MeteoWeatherCoreDataService.shared.deleteCity(city: city)
     }
+     */
     
+    public func deleteCity(with name: String, completion: @escaping (Result<Void, MeteoWeatherDataError>) -> ()) {
+        // Retrieve the existing entity
+        if let cityToDelete = MeteoWeatherCoreDataService.shared.checkSavedCity(with: name) {
+            print("La ville de \(name) sera supprimée")
+            MeteoWeatherCoreDataService.shared.deleteCity(city: cityToDelete) { result in
+                completion(result)
+            }
+        }
+    }
+
     public func updateCities(completion: @escaping (Result<Bool, MeteoWeatherDataError>) -> ()) {
         let savedCities = MeteoWeatherCoreDataService.shared.fetchAllCities().compactMap { GeocodedCity(name: $0.name ?? "", localNames: nil, lat: $0.lat, lon: $0.lon, country: $0.country ?? "", state: nil) }
         

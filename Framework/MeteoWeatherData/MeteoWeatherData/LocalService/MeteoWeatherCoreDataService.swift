@@ -222,6 +222,18 @@ public class MeteoWeatherCoreDataService {
         }
     }
     
+    private func saveData(operationDescription: String, context: NSManagedObjectContext, completion: (Result<Void, MeteoWeatherDataError>) -> ()) {
+        // Save Data
+        do {
+            try context.save()
+            print("[MeteoWeatherCoreDataService] ✅ \(operationDescription): succès")
+            completion(.success(()))
+        } catch {
+            print("[MeteoWeatherCoreDataService] ❌ \(operationDescription): échec.\n\(error)")
+            completion(.failure(.localDatabaseSavingError))
+        }
+    }
+    
     public func checkSavedCities() -> Int {
         var count = 0
 
@@ -261,48 +273,6 @@ public class MeteoWeatherCoreDataService {
         }
     }
     
-    /*
-    public func fetchCity(name: String) async -> CityCurrentWeatherEntity {
-        print("[MeteoWeatherCoreDataService] Chargement de la météo de \(name)...")
-        
-        let filterPredicate = NSPredicate(format: "name LIKE[c] %@", name)
-        cityFetchRequest.predicate = filterPredicate
-        cityFetchRequest.fetchLimit = 1
-        
-        let context = persistentContainer?.newBackgroundContext()
-        context?.automaticallyMergesChangesFromParent = true
-        
-        return await context?.perform {
-            do {
-                let cities = try context?.fetch(self.cityFetchRequest).first
-                print("[MeteoWeatherCoreDataService] ✅ Chargement des villes terminée.")
-                return cities
-            } catch let fetchError {
-                print("[MeteoWeatherCoreDataService] ❌ Erreur lors de la récupération des données de météo: \(fetchError)")
-                fatalError("Erreur lors de la récupération des données de météo: \(fetchError)")
-            }
-        }
-        
-        /*
-         do {
-         let cityFetchRequest = NSFetchRequest<CityCurrentWeatherEntity>(entityName: "CityCurrentWeatherEntity")
-         let cityWeather = try context.fetch(cityFetchRequest).first
-         
-         guard let cityWeather else {
-         fatalError("Erreur lors de la récupération des données de météo de \(name)")
-         }
-         print("[MeteoWeatherCoreDataService] ✅ Chargement de la météo de \(cityWeather.name ?? "??") terminée.")
-         
-         return cityWeather
-         } catch let fetchError {
-         print("[MeteoWeatherCoreDataService] ❌ Erreur lors de la récupération des données de météo de \(name). \(fetchError)")
-         
-         fatalError("Erreur lors de la récupération des données de météo de \(name). \(fetchError)")
-         }
-         */
-    }
-     */
-    
     public func fetchAllCities() -> [CityCurrentWeatherEntity] {
         guard let context = persistentContainer?.viewContext else {
             print("[MeteoWeatherCoreDataService] ❌ Erreur lors de la récupération des données de météo. Contexte indisponible.")
@@ -317,9 +287,8 @@ public class MeteoWeatherCoreDataService {
             return cities
         } catch let fetchError {
             print("[MeteoWeatherCoreDataService] ❌ Erreur lors de la récupération des données de météo: \(fetchError)")
-            fatalError("Erreur lors de la récupération des données de météo: \(fetchError)")
+            return []
         }
-        
     }
     
     public func fetchAllCities(completion: @escaping (Result<[CityCurrentWeatherEntity], MeteoWeatherDataError>) -> ()) {
@@ -364,16 +333,17 @@ public class MeteoWeatherCoreDataService {
     }
     
     // Main thread
-    public func deleteCity(city: CityCurrentWeatherEntity) {
+    public func deleteCity(city: CityCurrentWeatherEntity, completion: @escaping (Result<Void, MeteoWeatherDataError>) -> ()) {
         guard let context = persistentContainer?.viewContext else {
             print("[MeteoWeatherCoreDataService] ❌ Erreur lors de la récupération du contexte.")
-            
+            completion(.failure(.localDatabaseFetchError))
             return
         }
         
         print("[MeteoWeatherCoreDataService] Suppression de \(city.name ?? "??")...")
         context.delete(city)
-        saveData(operationDescription: "Suppression de \(city.name ?? "??")", context: context)
+        // saveData(operationDescription: "Suppression de \(city.name ?? "??")", context: context)
+        saveData(operationDescription: "Suppression de \(city.name ?? "??")", context: context, completion: completion)
     }
     
     public func deleteAllCities() {

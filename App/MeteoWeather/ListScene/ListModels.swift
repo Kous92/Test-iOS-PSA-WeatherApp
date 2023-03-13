@@ -12,6 +12,11 @@ enum ListEntity {
     enum DeleteCity {
         struct Request {
             let name: String
+            let index: IndexPath
+        }
+        
+        struct Response {
+            let result: Result<IndexPath, MeteoWeatherDataError>
         }
     }
     
