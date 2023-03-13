@@ -8,14 +8,10 @@
 import Foundation
 import UIKit
 
-final class ListRouter: ListRoutingLogic, ListDataPassing, AddDataDelegate {
+final class ListRouter: ListRoutingLogic, ListDataPassing {
     
     weak var view: ListViewController?
     var dataStore: ListDataStore?
-    
-    func showDetailView() {
-        print("Navigation vers la vue détail")
-    }
     
     func showAddView() {
         guard let addViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "AddViewController") as? AddViewController,
@@ -29,15 +25,34 @@ final class ListRouter: ListRoutingLogic, ListDataPassing, AddDataDelegate {
         navigateToAddView(source: listViewController, destination: addViewController)
     }
     
-    private func navigateToDetailView(source: ListViewController, destination: DetailViewController) {
+    func showDetailView(at indexPath: IndexPath) {
+        print("Navigation vers la vue détail à l'index \(indexPath.row)")
+        guard let detailViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "DetailViewController") as? DetailViewController,
+              let dataStore,
+              var detailDataStore = detailViewController.router?.dataStore,
+              let newsListViewController = view
+        else {
+            fatalError("La vue détail n'est pas disponible !")
+        }
         
+        passDataToDetailView(source: dataStore, destination: &detailDataStore, at: indexPath)
+        navigateToDetailView(source: newsListViewController, destination: detailViewController)
+    }
+    
+    func passDataToDetailView(source: ListDataStore, destination: inout DetailDataStore, at indexPath: IndexPath) {
+        destination.cityWeather = source.cities[indexPath.row]
+    }
+    
+    private func navigateToDetailView(source: ListViewController, destination: DetailViewController) {
+        source.navigationController?.pushViewController(destination, animated: true)
     }
     
     private func navigateToAddView(source: ListViewController, destination: AddViewController) {
         source.navigationController?.present(destination, animated: true)
     }
-    
-    // Delegate method
+}
+
+extension ListRouter: AddDataDelegate {
     func updateCityList() {
         updateFromAddView()
     }

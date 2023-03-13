@@ -7,6 +7,7 @@
 
 import Foundation
 
-final class DetailRouter {
-    
+final class DetailRouter: DetailDataPassing {
+    weak var view: DetailViewController?
+    var dataStore: DetailDataStore?
 }
