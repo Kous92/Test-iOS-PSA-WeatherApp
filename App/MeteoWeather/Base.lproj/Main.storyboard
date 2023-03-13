@@ -4,6 +4,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -19,7 +20,7 @@
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="VTp-Sh-rjo">
                                 <rect key="frame" x="0.0" y="103" width="393" height="749"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="weatherCell" rowHeight="130" id="iaN-RP-s7k" customClass="CityWeatherTableViewCell" customModule="MeteoWeather" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="50" width="393" height="130"/>
@@ -62,7 +63,7 @@
                                                             </subviews>
                                                         </stackView>
                                                     </subviews>
-                                                    <color key="backgroundColor" red="0.0064332137099999999" green="0.00057687686070000002" blue="0.43842622419999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                    <color key="backgroundColor" red="0.0084398136314057463" green="0.0" blue="0.67413015461237102" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                     <constraints>
                                                         <constraint firstItem="OVv-Ve-NqG" firstAttribute="top" secondItem="DKn-Na-EsT" secondAttribute="top" constant="10" id="UAo-lQ-fMd"/>
                                                         <constraint firstAttribute="trailing" secondItem="mg7-Xa-FzD" secondAttribute="trailing" constant="10" id="ZhW-Le-DHC"/>
@@ -80,6 +81,7 @@
                                                 <constraint firstAttribute="bottom" secondItem="DKn-Na-EsT" secondAttribute="bottom" constant="10" id="b6t-iZ-ScG"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <connections>
                                             <outlet property="cellFrame" destination="DKn-Na-EsT" id="HTO-S0-IHr"/>
                                             <outlet property="cityNameLabel" destination="sun-lt-FLi" id="vKE-ii-OBc"/>
@@ -92,7 +94,7 @@
                             </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" name="BackgroundColor"/>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="VTp-Sh-rjo" secondAttribute="bottom" id="4Sg-xC-yu3"/>
                             <constraint firstItem="VTp-Sh-rjo" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="AL4-fY-IK5"/>
@@ -102,6 +104,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="Liste des villes" id="ZsB-J8-bEN">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="Ngl-Gl-Efa">
+                            <color key="tintColor" systemColor="labelColor"/>
                             <connections>
                                 <action selector="addNewCity:" destination="BYZ-38-t0r" id="TDd-qD-cNB"/>
                             </connections>
@@ -184,23 +187,24 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <searchBar contentMode="redraw" text="" placeholder="Rechercher" translatesAutoresizingMaskIntoConstraints="NO" id="lFJ-4o-h7S">
-                                <rect key="frame" x="0.0" y="74" width="393" height="56"/>
+                                <rect key="frame" x="0.0" y="69" width="393" height="56"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <connections>
                                     <outlet property="delegate" destination="qpo-gK-HN0" id="Bcn-2m-aUQ"/>
                                 </connections>
                             </searchBar>
-                            <tableView hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="EQT-Fv-9bK">
-                                <rect key="frame" x="0.0" y="130" width="393" height="688"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="EQT-Fv-9bK">
+                                <rect key="frame" x="0.0" y="125" width="393" height="727"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="searchCell" id="PeO-UU-fPM">
-                                        <rect key="frame" x="0.0" y="50" width="393" height="43.666667938232422"/>
+                                        <rect key="frame" x="0.0" y="50" width="393" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="PeO-UU-fPM" id="Oqk-9Y-cFn">
-                                            <rect key="frame" x="0.0" y="0.0" width="393" height="43.666667938232422"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="393" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
@@ -213,12 +217,12 @@
                             </activityIndicatorView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="EJk-q8-BaB"/>
-                        <color key="backgroundColor" red="0.0064332137099999999" green="0.00057687686070000002" blue="0.43842622419999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <color key="backgroundColor" name="BackgroundColor"/>
                         <constraints>
                             <constraint firstItem="EQT-Fv-9bK" firstAttribute="leading" secondItem="EJk-q8-BaB" secondAttribute="leading" id="5c7-ki-xff"/>
                             <constraint firstItem="n1G-vk-3L7" firstAttribute="centerX" secondItem="hc9-Ch-JFt" secondAttribute="centerX" id="K1d-Pj-xLT"/>
-                            <constraint firstItem="lFJ-4o-h7S" firstAttribute="top" secondItem="EJk-q8-BaB" secondAttribute="top" constant="15" id="ORq-FU-drm"/>
-                            <constraint firstItem="EJk-q8-BaB" firstAttribute="bottom" secondItem="EQT-Fv-9bK" secondAttribute="bottom" id="XgL-PC-NTZ"/>
+                            <constraint firstItem="lFJ-4o-h7S" firstAttribute="top" secondItem="EJk-q8-BaB" secondAttribute="top" constant="10" id="ORq-FU-drm"/>
+                            <constraint firstAttribute="bottom" secondItem="EQT-Fv-9bK" secondAttribute="bottom" id="XgL-PC-NTZ"/>
                             <constraint firstItem="lFJ-4o-h7S" firstAttribute="trailing" secondItem="EJk-q8-BaB" secondAttribute="trailing" id="Xmu-4s-4Ai"/>
                             <constraint firstItem="EJk-q8-BaB" firstAttribute="trailing" secondItem="EQT-Fv-9bK" secondAttribute="trailing" id="bUx-qA-63C"/>
                             <constraint firstItem="EQT-Fv-9bK" firstAttribute="top" secondItem="lFJ-4o-h7S" secondAttribute="bottom" id="cX8-P4-a4p"/>
@@ -258,6 +262,12 @@
     <resources>
         <image name="02d" width="33.333332061767578" height="33.333332061767578"/>
         <image name="xmark.icloud.fill" catalog="system" width="128" height="90"/>
+        <namedColor name="BackgroundColor">
+            <color red="0.52899998426437378" green="0.80800002813339233" blue="0.92199999094009399" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+        </namedColor>
+        <systemColor name="labelColor">
+            <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
