@@ -57,6 +57,12 @@ final class AddViewController: UIViewController {
     private func setViews() {
         tableView.dataSource = self
         tableView.delegate = self
+        
+        // Search bar
+        UIBarButtonItem.appearance(whenContainedInInstancesOf: [UISearchBar.self]).title = "Annuler"
+        UIBarButtonItem.appearance(whenContainedInInstancesOf: [UISearchBar.self]).tintColor = .label
+        searchBar.backgroundImage = UIImage() // No background
+        searchBar.showsCancelButton = false
         searchBar.delegate = self
     }
     
@@ -157,7 +163,33 @@ extension AddViewController: UITableViewDataSource {
 }
 
 extension AddViewController: UISearchBarDelegate {
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        self.searchBar.setShowsCancelButton(true, animated: true)
+    }
+    
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         searchQuery = searchText
+        
+        if searchText.count == 0 {
+            clearList()
+        }
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchQuery = ""
+        self.searchBar.text = ""
+        self.searchBar.setShowsCancelButton(false, animated: true)
+        searchBar.resignFirstResponder()
+        clearList()
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder() // Masquer le clavier et stopper l'édition du texte
+        self.searchBar.setShowsCancelButton(false, animated: true) // Masquer le bouton d'annulation
+    }
+    
+    func clearList() {
+        tableView.isHidden = true
+        viewModels.removeAll()
     }
 }
