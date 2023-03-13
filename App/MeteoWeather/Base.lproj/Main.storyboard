@@ -190,7 +190,7 @@
                                     <outlet property="delegate" destination="qpo-gK-HN0" id="Bcn-2m-aUQ"/>
                                 </connections>
                             </searchBar>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="EQT-Fv-9bK">
+                            <tableView hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="EQT-Fv-9bK">
                                 <rect key="frame" x="0.0" y="130" width="393" height="688"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
@@ -204,20 +204,30 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="n1G-vk-3L7">
+                                <rect key="frame" x="146.66666666666666" y="376" width="100" height="100"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="100" id="PWf-MP-4Hh"/>
+                                    <constraint firstAttribute="height" constant="100" id="yj0-Ti-Bu5"/>
+                                </constraints>
+                            </activityIndicatorView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="EJk-q8-BaB"/>
                         <color key="backgroundColor" red="0.0064332137099999999" green="0.00057687686070000002" blue="0.43842622419999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
                             <constraint firstItem="EQT-Fv-9bK" firstAttribute="leading" secondItem="EJk-q8-BaB" secondAttribute="leading" id="5c7-ki-xff"/>
+                            <constraint firstItem="n1G-vk-3L7" firstAttribute="centerX" secondItem="hc9-Ch-JFt" secondAttribute="centerX" id="K1d-Pj-xLT"/>
                             <constraint firstItem="lFJ-4o-h7S" firstAttribute="top" secondItem="EJk-q8-BaB" secondAttribute="top" constant="15" id="ORq-FU-drm"/>
                             <constraint firstItem="EJk-q8-BaB" firstAttribute="bottom" secondItem="EQT-Fv-9bK" secondAttribute="bottom" id="XgL-PC-NTZ"/>
                             <constraint firstItem="lFJ-4o-h7S" firstAttribute="trailing" secondItem="EJk-q8-BaB" secondAttribute="trailing" id="Xmu-4s-4Ai"/>
                             <constraint firstItem="EJk-q8-BaB" firstAttribute="trailing" secondItem="EQT-Fv-9bK" secondAttribute="trailing" id="bUx-qA-63C"/>
                             <constraint firstItem="EQT-Fv-9bK" firstAttribute="top" secondItem="lFJ-4o-h7S" secondAttribute="bottom" id="cX8-P4-a4p"/>
                             <constraint firstItem="lFJ-4o-h7S" firstAttribute="leading" secondItem="EJk-q8-BaB" secondAttribute="leading" id="o8d-9g-Hea"/>
+                            <constraint firstItem="n1G-vk-3L7" firstAttribute="centerY" secondItem="hc9-Ch-JFt" secondAttribute="centerY" id="uH4-En-iEk"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="loadingSpinner" destination="n1G-vk-3L7" id="V2I-bH-O3Y"/>
                         <outlet property="searchBar" destination="lFJ-4o-h7S" id="gvG-JD-0MT"/>
                         <outlet property="tableView" destination="EQT-Fv-9bK" id="vxk-xW-KC3"/>
                     </connections>

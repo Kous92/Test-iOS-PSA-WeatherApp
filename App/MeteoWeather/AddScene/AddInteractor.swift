@@ -27,8 +27,16 @@ extension AddInteractor: AddBusinessLogic {
         }
     }
     
-    func addSelectedCity(index: IndexPath) {
+    func addSelectedCity(request: AddEntity.AddCity.Request) {
+        print("2) [Add] Interactor: Lancement de l'appel API depuis le Worker pour la sauvegarde de \(request.query).")
+        guard let cityToAdd = getCityForAddition(with: request.query) else {
+            print("Erreur: la ville à ajouter n'est pas présente")
+            return
+        }
         
+        worker.addCity(with: cityToAdd) { [weak self] response in
+            self?.presenter?.notifyDataAddition(response: response)
+        }
     }
     
     private func prepareDataStore(with response: AddEntity.SearchCity.Response) {
@@ -39,5 +47,9 @@ extension AddInteractor: AddBusinessLogic {
             default:
                 return
         }
+    }
+    
+    private func getCityForAddition(with name: String) -> CitySearchOutput? {
+        return cities.filter { $0.getCityViewModel().name == name }.first
     }
 }

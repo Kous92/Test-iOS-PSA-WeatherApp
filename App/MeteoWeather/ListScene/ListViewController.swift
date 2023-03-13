@@ -120,18 +120,10 @@ extension ListViewController: UITableViewDataSource {
         return cell
     }
     
-    // À faire: adapter cette fonctionnalité à l'architecture.
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             let cityName = viewModels[indexPath.row].name
             interactor?.deleteCity(request: ListEntity.DeleteCity.Request(name: cityName, index: indexPath))
-            
-            /*
-            let city = cities[indexPath.row]
-            repository.deleteCity(with: city)
-            cities.remove(at: indexPath.row)
-            tableView.deleteRows(at: [indexPath], with: .fade)
-             */
         }
     }
 }

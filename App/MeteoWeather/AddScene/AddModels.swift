@@ -25,6 +25,7 @@ enum AddEntity {
         }
         
         struct Response {
+            let result: Result<Void, MeteoWeatherDataError>
         }
     }
     

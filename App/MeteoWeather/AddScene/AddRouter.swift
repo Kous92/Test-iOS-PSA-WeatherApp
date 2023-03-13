@@ -13,5 +13,15 @@ final class AddRouter: AddRoutingLogic {
     
     func backToListView() {
         addDelegate?.updateCityList()
+        
+        guard let addViewController else {
+            fatalError("Aucune référence vers la vue pour ajouter des villes !")
+        }
+        
+        dismissView(source: addViewController)
+    }
+    
+    func dismissView(source: AddViewController) {
+        addViewController?.dismiss(animated: true)
     }
 }

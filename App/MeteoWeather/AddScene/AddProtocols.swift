@@ -11,18 +11,19 @@ import Foundation
 protocol AddDisplayLogic: AnyObject {
     func displaySearchResults(with viewModel: AddEntity.ViewModel)
     func displayErrorMessage(with viewModel: AddEntity.ViewModel.Error)
+    func dismissView()
 }
 
 // View -> Interactor
 protocol AddBusinessLogic: AnyObject {
     func searchCities(request: AddEntity.SearchCity.Request)
-    func addSelectedCity(index: IndexPath)
+    func addSelectedCity(request: AddEntity.AddCity.Request)
 }
 
 // Interactor -> Presenter
 protocol AddPresentationLogic: AnyObject {
     func presentCities(response: AddEntity.SearchCity.Response)
-    func notifyDataAddition()
+    func notifyDataAddition(response: AddEntity.AddCity.Response)
 }
 
 // View -> Router

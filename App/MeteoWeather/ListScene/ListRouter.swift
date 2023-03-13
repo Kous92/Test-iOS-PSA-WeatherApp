@@ -25,7 +25,6 @@ final class ListRouter: ListRoutingLogic, ListDataPassing, AddDataDelegate {
             fatalError("La vue pour ajouter des villes n'est pas disponible !")
         }
         
-        addViewController.updateDelegate = listViewController
         addRouter.addDelegate = self
         navigateToAddView(source: listViewController, destination: addViewController)
     }

@@ -35,7 +35,6 @@ public class MeteoWeatherDataRepository {
     }
     
     public func addCity(with geocodedCity: GeocodedCity, completion: @escaping (Result<CityCurrentWeatherEntity, MeteoWeatherDataError>) -> ()) {
-        
         if let existingCity = MeteoWeatherCoreDataService.shared.checkSavedCity(with: getCityName(with: geocodedCity)) {
             print("Attention: conflit avec la ville de \(existingCity.name ?? "??")")
             
@@ -74,12 +73,6 @@ public class MeteoWeatherDataRepository {
     public func fetchAllCities(completion: @escaping (Result<[CityCurrentWeatherEntity], MeteoWeatherDataError>) -> ()) {
         MeteoWeatherCoreDataService.shared.fetchAllCities(completion: completion)
     }
-    
-    /*
-    public func deleteCity(with city: CityCurrentWeatherEntity) {
-        MeteoWeatherCoreDataService.shared.deleteCity(city: city)
-    }
-     */
     
     public func deleteCity(with name: String, completion: @escaping (Result<Void, MeteoWeatherDataError>) -> ()) {
         // Retrieve the existing entity

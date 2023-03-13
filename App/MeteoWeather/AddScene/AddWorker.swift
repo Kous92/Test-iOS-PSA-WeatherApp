@@ -24,6 +24,22 @@ final class AddWorker {
         }
     }
     
+    func addCity(with city: CitySearchOutput, completion: @escaping (_ response: AddEntity.AddCity.Response) -> ()) {
+        let geocodedCity = city.getGeocodedCity()
+        print("3) [Add] Worker: Ajout de la météo de \(city.name)...")
+        repository.addCity(with: geocodedCity) { result in
+            print("4) [Add] Worker: Renvoi de la réponse à l'Interactor.")
+            switch result {
+                case .success(let entity):
+                    print("-> 4.1) [Add] Les données de \(entity.name ?? "??") ont été sauvegardées en base locale.")
+                    completion(AddEntity.AddCity.Response(result: .success(())))
+                case .failure(let error):
+                    print("-> 4.1) [Add] Échec: une erreur est survenue.")
+                    completion(AddEntity.AddCity.Response(result: .failure(error)))
+            }
+        }
+    }
+    
     private func handleResult(with result: Result<[GeocodedCity], MeteoWeatherDataError>) -> AddEntity.SearchCity.Response {
         print("4) [Add] Worker: Renvoi de la réponse à l'Interactor.")
         switch result {
