@@ -31,7 +31,14 @@ extension AddPresenter: AddPresentationLogic {
         }
     }
     
-    func notifyDataAddition() {
-        
+    func notifyDataAddition(response: AddEntity.AddCity.Response) {
+        switch response.result {
+            case .success():
+                print("-> 6.1) [Add] Presenter -> View: L'entité est ajoutée, la vue peut être fermée.")
+                view?.dismissView()
+            case .failure(let error):
+                print("-> 6.1) [Add] Presenter -> View: Notification de la vue d'une erreur.")
+                view?.displayErrorMessage(with: AddEntity.ViewModel.Error(message: error.rawValue))
+        }
     }
 }
