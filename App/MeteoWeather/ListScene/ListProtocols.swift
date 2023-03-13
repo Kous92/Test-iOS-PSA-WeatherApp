@@ -28,7 +28,7 @@ protocol ListPresentationLogic: AnyObject {
 
 // View -> Router
 protocol ListRoutingLogic: AnyObject {
-    func showDetailView()
+    func showDetailView(at indexPath: IndexPath)
     func showAddView()
     func updateFromAddView()
 }

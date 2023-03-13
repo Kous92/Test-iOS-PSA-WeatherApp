@@ -7,6 +7,10 @@
 
 import Foundation
 
-final class DetailPresenter {
+final class DetailPresenter: DetailPresentationLogic {
+    weak var view: DetailDisplayLogic?
     
+    func presentDetails(response: DetailEntity.WeatherDetails.Response) {
+        view?.displayDetails(with: DetailEntity.WeatherDetails.ViewModel(cityWeather: response.cityWeather))
+    }
 }
