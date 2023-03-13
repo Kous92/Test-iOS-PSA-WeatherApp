@@ -8,7 +8,7 @@
 import UIKit
 import MeteoWeatherData
 
-class CityWeatherTableViewCell: UITableViewCell {
+final class CityWeatherTableViewCell: UITableViewCell {
     
     @IBOutlet weak var cellFrame: UIView!
     @IBOutlet weak var cityNameLabel: UILabel!

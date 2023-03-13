@@ -22,7 +22,7 @@ public final class MeteoWeatherDataNetworkAPIService: MeteoWeatherDataAPIService
         await getRequest(endpoint: .currentWeather(lat: lat, lon: lon))
     }
     
-    public func fetchGeocodedCity(query: String, completion: @escaping (Result<CityCurrentWeather, MeteoWeatherDataError>) -> ()) {
+    public func fetchGeocodedCity(query: String, completion: @escaping (Result<[GeocodedCity], MeteoWeatherDataError>) -> ()) {
         getRequest(endpoint: .geocoding(cityName: query), completion: completion)
     }
     

@@ -30,6 +30,7 @@ protocol ListPresentationLogic: AnyObject {
 protocol ListRoutingLogic: AnyObject {
     func showDetailView()
     func showAddView()
+    func updateFromAddView()
 }
 
 // From the interactor, the data will be stored here. The router will retrieve the wanted data to pass it to an other view through an other DataStore.

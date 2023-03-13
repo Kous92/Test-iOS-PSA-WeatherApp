@@ -8,6 +8,7 @@
 import Foundation
 import MeteoWeatherData
 
+// Data Transfer Object between app layer and data layer
 struct CityCurrentWeather {
     let name: String
     let country: String

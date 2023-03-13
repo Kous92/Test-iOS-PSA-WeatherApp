@@ -9,11 +9,17 @@ import UIKit
 import Combine
 import MeteoWeatherData
 
-class AddViewController: UIViewController {
+final class AddViewController: UIViewController {
     let repository = MeteoWeatherDataRepository(networkService: MeteoWeatherDataNetworkAPIService())
     var geocodedCities = [GeocodedCity]()
     
-    @Published var searchQuery = ""
+    private var interactor: AddBusinessLogic?
+    var router: (AddRoutingLogic)?
+    private var viewModels = [AddEntity.ViewModel.CityViewModel]()
+    
+    private var updatedResult = PassthroughSubject<Bool, Never>()
+    private var isLoading = PassthroughSubject<Bool, Never>()
+    @Published private var searchQuery = ""
     private var subscriptions = Set<AnyCancellable>()
     
     @IBOutlet weak var searchBar: UISearchBar!
@@ -21,20 +27,67 @@ class AddViewController: UIViewController {
     
     weak var updateDelegate: AddDataDelegate?
     
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+        setup()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        setup()
+    }
+    
+    // Setting Clean Swift components
+    private func setup() {
+        let interactor = AddInteractor()
+        let presenter = AddPresenter()
+        let router = AddRouter()
+        interactor.presenter = presenter
+        presenter.view = self
+        router.addViewController = self
+        self.interactor = interactor
+        self.router = router
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         tableView.dataSource = self
         tableView.delegate = self
         searchBar.delegate = self
-        
+        setBindings()
+    }
+    
+    private func setBindings() {
         $searchQuery
             .receive(on: DispatchQueue.main)
             .removeDuplicates()
             .debounce(for: .seconds(0.8), scheduler: RunLoop.main)
             .filter { !$0.isEmpty }
             .sink { [weak self] value in
-                self?.searchCity(with: value)
+                print("1) [Add] View: Exécution de l'action de recherche...")
+                // self?.searchCity(with: value)
+                self?.interactor?.searchCities(request: AddEntity.SearchCity.Request(query: value))
+            }.store(in: &subscriptions)
+        
+        isLoading
+            .receive(on: DispatchQueue.main)
+            .sink { /*[weak self]*/ isLoading in
+                if isLoading {
+                    /*
+                    self?.spinner.startAnimating()
+                    self?.spinner.isHidden = false
+                    self?.articleTableView.isHidden = true
+                     */
+                }
+            }.store(in: &subscriptions)
+        
+        updatedResult
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] updated in
+                if updated {
+                    self?.tableView.reloadData()
+                }
             }.store(in: &subscriptions)
     }
     
@@ -70,9 +123,20 @@ class AddViewController: UIViewController {
     }
 }
 
+extension AddViewController: AddDisplayLogic {
+    func displaySearchResults(with viewModel: AddEntity.ViewModel) {
+        self.viewModels = viewModel.cellViewModels
+        updatedResult.send(true)
+    }
+    
+    func displayErrorMessage(with viewModel: AddEntity.ViewModel.Error) {
+        alertError(errorMessage: viewModel.message)
+    }
+}
+
 extension AddViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        addAndSaveSelectedCity(with: geocodedCities[indexPath.row])
+        // addAndSaveSelectedCity(with: geocodedCities[indexPath.row])
     }
     
     func addAndSaveSelectedCity(with city: GeocodedCity) {
@@ -83,7 +147,7 @@ extension AddViewController: UITableViewDelegate {
                     DispatchQueue.main.async { [weak self] in
                         print(data)
                         print("Ready to dismiss.")
-                        self?.updateDelegate?.updateData()
+                        self?.updateDelegate?.updateCityList()
                         self?.dismiss(animated: true)
                     }
                 case .failure(let error):
@@ -99,12 +163,14 @@ extension AddViewController: UITableViewDelegate {
 
 extension AddViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        geocodedCities.count
+        viewModels.count
+        // geocodedCities.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "searchCell", for: indexPath)
         
+        /*
         var place = ""
         if let name = geocodedCities[indexPath.row].localNames?["fr"] {
             place += name
@@ -117,8 +183,9 @@ extension AddViewController: UITableViewDataSource {
         }
         
         place += " \(geocodedCities[indexPath.row].country)"
+         */
         
-        cell.textLabel?.text = place
+        cell.textLabel?.text = viewModels[indexPath.row].name
         
         return cell
     }
