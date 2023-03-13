@@ -61,6 +61,12 @@ public class MeteoWeatherDataRepository {
         return MeteoWeatherCoreDataService.shared.fetchAllCities()
     }
     
+    // Fetches all cities with their respective data, saved locally
+    public func fetchAllCities(completion: @escaping (Result<[CityCurrentWeatherEntity], MeteoWeatherDataError>) -> ()) {
+        // return MeteoWeatherCoreDataService.shared.fetchAllCities()
+        MeteoWeatherCoreDataService.shared.fetchAllCities(completion: completion)
+    }
+    
     public func deleteCity(with city: CityCurrentWeatherEntity) {
         MeteoWeatherCoreDataService.shared.deleteCity(city: city)
     }

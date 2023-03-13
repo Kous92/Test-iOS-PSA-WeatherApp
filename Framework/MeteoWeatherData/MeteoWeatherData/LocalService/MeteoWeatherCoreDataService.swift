@@ -322,6 +322,25 @@ public class MeteoWeatherCoreDataService {
         
     }
     
+    public func fetchAllCities(completion: @escaping (Result<[CityCurrentWeatherEntity], MeteoWeatherDataError>) -> ()) {
+        guard let context = persistentContainer?.viewContext else {
+            print("[MeteoWeatherCoreDataService] ❌ Erreur lors de la récupération des données de météo. Contexte indisponible.")
+            completion(.failure(.localDatabaseError))
+            return
+        }
+        
+        let fetchRequest = NSFetchRequest<CityCurrentWeatherEntity>(entityName: "CityCurrentWeatherEntity")
+        
+        do {
+            let cities = try context.fetch(fetchRequest)
+            print("[MeteoWeatherCoreDataService] ✅ Chargement des villes terminée.")
+            completion(.success(cities))
+        } catch let fetchError {
+            print("[MeteoWeatherCoreDataService] ❌ Erreur lors de la récupération des données de météo: \(fetchError)")
+            completion(.failure(.localDatabaseFetchError))
+        }
+    }
+    
     public func asyncFetchAllCities() async -> [CityCurrentWeatherEntity] {
         guard let context = persistentContainer?.viewContext else {
             print("[MeteoWeatherCoreDataService] ❌ Erreur lors de la récupération des données de météo. Contexte indisponible.")
