@@ -9,6 +9,7 @@ import Foundation
 
 public enum MeteoWeatherDataError: String, Error {
     case localDatabaseError = "Une erreur est survenue au niveau de la base de données locale."
+    case localDatabaseFetchError = "Une erreur est survenue lors de la récupération des données de la base de données locale."
     case parametersMissing = "Erreur 400: Paramètres manquants dans la requête."
     case invalidApiKey = "Erreur 401: La clé d'API fournie est inactive, invalide ou inexistante."
     case notFound = "Erreur 404: Aucun contenu disponible."

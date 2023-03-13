@@ -20,11 +20,11 @@ class CityWeatherTableViewCell: UITableViewCell {
         cellFrame.layer.cornerRadius = 10
     }
     
-    func configure(with city: CityCurrentWeatherEntity) {
+    func configure(with viewModel: ListEntity.ViewModel.CityViewModel) {
         setView()
-        cityNameLabel.text = city.name ?? "Lieu inconnu"
-        weatherDescriptionLabel.text = city.weatherDescription ?? "Aucune information"
-        temperatureLabel.text = "\(Int(city.temperature))°C"
-        weatherIconImage.image = UIImage(named: city.weatherIcon ?? "xmark.icloud.fill")
+        cityNameLabel.text = viewModel.name
+        weatherDescriptionLabel.text = viewModel.weatherDescription
+        temperatureLabel.text = viewModel.temperature
+        weatherIconImage.image = UIImage(named: viewModel.iconImage)
     }
 }
