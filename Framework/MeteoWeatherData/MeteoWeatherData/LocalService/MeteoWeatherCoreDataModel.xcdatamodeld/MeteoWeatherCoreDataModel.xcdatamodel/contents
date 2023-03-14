@@ -17,8 +17,6 @@
         <attribute name="temperature" optional="YES" attributeType="Double" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="tempMax" optional="YES" attributeType="Double" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="tempMin" optional="YES" attributeType="Double" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="threeHourRain" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
-        <attribute name="threeHourSnow" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="weatherDescription" optional="YES" attributeType="String"/>
         <attribute name="weatherIcon" optional="YES" attributeType="String"/>
         <attribute name="windGust" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>

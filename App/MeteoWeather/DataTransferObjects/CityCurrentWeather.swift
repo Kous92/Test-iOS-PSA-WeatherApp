@@ -28,9 +28,7 @@ struct CityCurrentWeather {
     let windSpeed: Double
     let windGust: Double
     let oneHourRain: Double
-    let threeHourRain: Double
     let oneHourSnow: Double
-    let threeHourSnow: Double
     let lastUpdateTime: Int
     
     init(with city: CityCurrentWeatherEntity) {
@@ -52,9 +50,7 @@ struct CityCurrentWeather {
         self.windSpeed = city.windSpeed
         self.windGust = city.windGust
         self.oneHourRain = city.oneHourRain
-        self.threeHourRain = city.threeHourRain
         self.oneHourSnow = city.oneHourSnow
-        self.threeHourSnow = city.threeHourSnow
         self.lastUpdateTime = Int(city.lastUpdateTime)
     }
     

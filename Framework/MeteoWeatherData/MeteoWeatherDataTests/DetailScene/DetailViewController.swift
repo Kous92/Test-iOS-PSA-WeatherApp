@@ -20,6 +20,7 @@ final class DetailViewController: UIViewController {
     @IBOutlet weak var iconImageView: UIImageView!
     @IBOutlet weak var weatherDescription: UILabel!
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var lastUpdateLabel: UILabel!
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
@@ -73,6 +74,7 @@ extension DetailViewController {
         tempLabel.text = viewModel.temperature
         iconImageView.image = UIImage(named: viewModel.weatherIcon)
         weatherDescription.text = viewModel.weatherDescription
+        lastUpdateLabel.text = viewModel.lastUpdateTime
         
         tableView.reloadData()
     }
@@ -89,39 +91,6 @@ extension DetailViewController: UITableViewDataSource {
         }
         
         return cell
-        /*
-        if indexPath.row == 0 {
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: "temperatureCell", for: indexPath) as? TemperatureTableViewCell else {
-                return UITableViewCell()
-            }
-            
-            return cell
-        } else if indexPath.row == 1 {
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: "windCell", for: indexPath) as? WindTableViewCell else {
-                return UITableViewCell()
-            }
-            
-            return cell
-        } else if indexPath.row == 2 {
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: "rainSnowCell", for: indexPath) as? RainSnowTableViewCell else {
-                return UITableViewCell()
-            }
-            
-            return cell
-        } else if indexPath.row == 3 {
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: "sunsetSunriseCell", for: indexPath) as? SunsetSunriseTableViewCell else {
-                return UITableViewCell()
-            }
-            
-            return cell
-        } else {
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: "otherCell", for: indexPath) as? OtherWeatherStatsTableViewCell else {
-                return UITableViewCell()
-            }
-            
-            return cell
-        }
-         */
     }
 }
 
