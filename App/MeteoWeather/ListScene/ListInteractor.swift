@@ -13,8 +13,8 @@ final class ListInteractor: ListDataStore {
     var presenter: ListPresentationLogic?
     private var worker: ListWorker
     
-    init() {
-        self.worker = ListWorker()
+    init(worker: ListWorker) {
+        self.worker = worker
     }
 }
 
