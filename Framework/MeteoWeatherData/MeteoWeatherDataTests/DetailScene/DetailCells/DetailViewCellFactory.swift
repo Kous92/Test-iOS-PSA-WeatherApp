@@ -33,7 +33,7 @@ final class DetailViewCellFactory {
                 guard let cell = tableView.dequeueReusableCell(withIdentifier: RainSnowTableViewCell.identifier, for: indexPath) as? RainSnowTableViewCell else {
                     return UITableViewCell()
                 }
-                cell.configure(with: viewModel.getRainViewModel())
+                cell.configure(with: viewModel.getSnowViewModel())
                 return cell
             case .sunset:
                 guard let cell = tableView.dequeueReusableCell(withIdentifier: SunsetSunriseTableViewCell.identifier, for: indexPath) as? SunsetSunriseTableViewCell else {

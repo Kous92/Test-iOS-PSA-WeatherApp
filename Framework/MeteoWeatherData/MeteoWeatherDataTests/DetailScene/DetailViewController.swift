@@ -33,6 +33,7 @@ final class DetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationController?.navigationBar.tintColor = .label
         setTableView()
         interactor?.getPassedCityWeather()
     }
