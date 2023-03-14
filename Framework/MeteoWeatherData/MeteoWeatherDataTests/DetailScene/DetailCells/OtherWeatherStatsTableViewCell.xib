@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="111" id="KGk-i7-Jjw" customClass="OtherWeatherStatsTableViewCell" customModule="MeteoWeather" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="377" height="111"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="377" height="111"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ECb-Qv-6QD">
+                        <rect key="frame" x="10" y="10" width="357" height="91"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" alignment="center" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="0PX-hS-SnI">
+                                <rect key="frame" x="10" y="10" width="337" height="71"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pression: 1200 hPa" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uWr-Nt-HDJ">
+                                        <rect key="frame" x="0.0" y="23.666666666666664" width="256.66666666666669" height="24"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" verticalHuggingPriority="251" image="cloud" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="QV8-FP-Xaz">
+                                        <rect key="frame" x="286.66666666666669" y="18.333333333333329" width="50.333333333333314" height="34.999999999999986"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="40" id="Afz-ZF-yYP"/>
+                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="40" id="iOU-qX-iNF"/>
+                                        </constraints>
+                                    </imageView>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.01044868086" green="0.0" blue="0.83458843429999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <constraints>
+                            <constraint firstItem="0PX-hS-SnI" firstAttribute="top" secondItem="ECb-Qv-6QD" secondAttribute="top" constant="10" id="1VQ-Sy-WKX"/>
+                            <constraint firstAttribute="bottom" secondItem="0PX-hS-SnI" secondAttribute="bottom" constant="10" id="BGQ-Mc-GtZ"/>
+                            <constraint firstItem="0PX-hS-SnI" firstAttribute="leading" secondItem="ECb-Qv-6QD" secondAttribute="leading" constant="10" id="dkA-aN-UxZ"/>
+                            <constraint firstAttribute="trailing" secondItem="0PX-hS-SnI" secondAttribute="trailing" constant="10" id="hWM-2d-POp"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="ECb-Qv-6QD" secondAttribute="trailing" constant="10" id="EUB-pg-Gpn"/>
+                    <constraint firstAttribute="bottom" secondItem="ECb-Qv-6QD" secondAttribute="bottom" constant="10" id="jo5-jb-PzP"/>
+                    <constraint firstItem="ECb-Qv-6QD" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="qZ8-Et-fDB"/>
+                    <constraint firstItem="ECb-Qv-6QD" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="vpg-vz-WeN"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <connections>
+                <outlet property="cellFrame" destination="ECb-Qv-6QD" id="4cd-l6-W0S"/>
+                <outlet property="weatherStatImage" destination="QV8-FP-Xaz" id="NEV-Uj-mQd"/>
+                <outlet property="weatherStatLabel" destination="uWr-Nt-HDJ" id="hwS-Jp-POJ"/>
+            </connections>
+            <point key="canvasLocation" x="182.44274809160305" y="43.309859154929576"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="cloud" catalog="system" width="128" height="87"/>
+    </resources>
+</document>

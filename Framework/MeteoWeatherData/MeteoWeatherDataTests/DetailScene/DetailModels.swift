@@ -7,10 +7,75 @@
 
 import Foundation
 
+enum DetailStatsType {
+    case wind
+    case temperature
+    case rain
+    case snow
+    case sunset
+    case pressure
+    case humidity
+    case cloudiness
+}
+
 enum DetailEntity {
     enum WeatherDetails {
         struct Response {
             var cityWeather: CityCurrentWeather
+        }
+        
+        struct WindViewModel {
+            let windSpeed: String?
+            let windGust: String?
+            
+            init(windSpeed: String?, windGust: String?) {
+                self.windSpeed = windSpeed
+                self.windGust = windGust
+            }
+        }
+        
+        struct RainSnowViewModel {
+            let type: String
+            let oneHourVolume: String
+            
+            init(type: String, oneHourVolume: String) {
+                self.type = type
+                self.oneHourVolume = oneHourVolume
+            }
+        }
+        
+        struct TemperatureViewModel {
+            let feelingTemperature: String?
+            let minTemperature: String?
+            let maxTemperature: String?
+            
+            internal init(feelingTemperature: String, minTemperature: String, maxTemperature: String) {
+                self.feelingTemperature = feelingTemperature
+                self.minTemperature = minTemperature
+                self.maxTemperature = maxTemperature
+            }
+        }
+        
+        struct SunsetSunriseViewModel {
+            let sunset: String
+            let sunrise: String
+            
+            init(sunset: String, sunrise: String) {
+                self.sunset = sunset
+                self.sunrise = sunrise
+            }
+        }
+        
+        struct OtherWeatherStatsViewModel {
+            let description: String
+            let value: String
+            let imageName: String
+            
+            init(description: String, value: String, imageName: String) {
+                self.description = description
+                self.value = value
+                self.imageName = imageName
+            }
         }
         
         struct ViewModel {
@@ -78,6 +143,61 @@ enum DetailEntity {
                 self.oneHourSnowAvailable = cityWeather.oneHourSnow != 1
                 self.threeHourSnow = cityWeather.threeHourSnow != 1 ? "\(round(cityWeather.threeHourSnow)) mm" : "Aucune chute de neige"
                 self.threeHourSnowAvailable = cityWeather.threeHourSnow != 1
+            }
+            
+            func getCellConfigurations() -> [DetailStatsType] {
+                var types = [DetailStatsType]()
+                types.append(.sunset)
+                
+                if temperatureFeelingAvailable && minTemperatureAvailable && maxTemperatureAvailable {
+                    types.append(.temperature)
+                }
+                
+                if windSpeedAvailable || windGustAvailable {
+                    types.append(.wind)
+                }
+                
+                if oneHourRainAvailable {
+                    types.append(.rain)
+                }
+                
+                if oneHourSnowAvailable {
+                    types.append(.snow)
+                }
+                
+                types += [.pressure, .humidity, .cloudiness]
+                return types
+            }
+            func getTemperatureViewModel() -> TemperatureViewModel {
+                return TemperatureViewModel(feelingTemperature: self.temperatureFeeling, minTemperature: self.minTemperature, maxTemperature: self.maxTemperature)
+            }
+            
+            func getWindViewModel() -> WindViewModel {
+                return WindViewModel(windSpeed: self.windSpeed, windGust: self.windGust)
+            }
+            
+            func getRainViewModel() -> RainSnowViewModel {
+                return RainSnowViewModel(type: "Pluie", oneHourVolume: self.oneHourRain)
+            }
+            
+            func getSnowViewModel() -> RainSnowViewModel {
+                return RainSnowViewModel(type: "Neige", oneHourVolume: self.oneHourSnow)
+            }
+            
+            func getSunsetSunriseViewModel() -> SunsetSunriseViewModel {
+                return SunsetSunriseViewModel(sunset: self.sunset, sunrise: self.sunrise)
+            }
+            
+            func getHumidityViewModel() -> OtherWeatherStatsViewModel {
+                return OtherWeatherStatsViewModel(description: "Humidité", value: self.humidity, imageName: "humidity.fill")
+            }
+            
+            func getVisibilityViewModel() -> OtherWeatherStatsViewModel {
+                return OtherWeatherStatsViewModel(description: "Visibilité", value: self.cloudiness, imageName: "eye")
+            }
+            
+            func getPressureViewModel() -> OtherWeatherStatsViewModel {
+                return OtherWeatherStatsViewModel(description: "Pression", value: self.pressure, imageName: "arrow.up")
             }
         }
     }
