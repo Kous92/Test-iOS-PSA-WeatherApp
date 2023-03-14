@@ -7,13 +7,18 @@
 
 import Foundation
 
+/// This class manages the OpenWeather API network service for all HTTP GET calls with different endpoints (Geocoding and Current weather data API)
 public final class MeteoWeatherDataNetworkAPIService: MeteoWeatherDataAPIService {
+    /// Required to use OpenWeather REST API, make sure that you private key is valid
     private var apiKey: String = "ab4ec97922530bc9f0dd33517d2d433b"
     
     public init() {
         
     }
     
+    /// Downloads, retrieves and decodes from JSON the geocoded city with name, country and GPS position. This version supports Swift Concurrency to be used in an `async` task (`Task`).
+    /// - Parameter query: the name of location to search
+    /// - Returns: The object of the retrieved city from OpenWeatherAPI Geocoding API
     public func fetchGeocodedCity(query: String) async -> Result<[GeocodedCity], MeteoWeatherDataError> {
         await getRequest(endpoint: .geocoding(cityName: query))
     }
@@ -22,6 +27,9 @@ public final class MeteoWeatherDataNetworkAPIService: MeteoWeatherDataAPIService
         await getRequest(endpoint: .currentWeather(lat: lat, lon: lon))
     }
     
+    /// Downloads, retrieves and decodes from JSON the geocoded city with name, country and GPS position.
+    /// - Parameter query: the name of location to search
+    /// - Parameter completion: Closure to handle the result with the decoded object of the retrieved city from OpenWeather Current weather data API if operation has succeeded, or an error if the operation have failed.
     public func fetchGeocodedCity(query: String, completion: @escaping (Result<[GeocodedCity], MeteoWeatherDataError>) -> ()) {
         getRequest(endpoint: .geocoding(cityName: query), completion: completion)
     }

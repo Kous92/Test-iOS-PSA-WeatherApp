@@ -7,6 +7,7 @@
 
 import Foundation
 
+/// The link between app layer and data layer of MeteoWeather app Clean Architecture. This class follows the Repository design pattern to provide an abstraction of data part, as interface to retrieve, save and delete data.
 public class MeteoWeatherDataRepository {
     private let networkService: MeteoWeatherDataAPIService?
     private let localService: MeteoWeatherLocalService?
@@ -21,11 +22,18 @@ public class MeteoWeatherDataRepository {
         networkService?.fetchGeocodedCity(query: query, completion: completion)
     }
     
-    // Returns localized city name if available or default name
+    /// Returns localized city name if available or default name
+    /// - Parameter geocodedCity: The object of the retrieved city from OpenWeatherAPI Geocoding API
+    /// - Returns: The name of city translated in french or the default one retreived from OpenWeatherAPI
     private func getCityName(with geocodedCity: GeocodedCity) -> String {
         return geocodedCity.localNames?["fr"] ?? geocodedCity.name
     }
     
+    
+    /// From geocoded city object previously retrieved, it downloads and saves data with OpenWeatherAPI Current weather data.
+    /// - Parameters:
+    ///   - geocodedCity: The object of the retrieved city from OpenWeatherAPI Geocoding API
+    ///   - completion: Closure to handle the result with saved entity if saving to the local database has succeeded, or an error if saving to the local database has failed.
     public func addCity(with geocodedCity: GeocodedCity, completion: @escaping (Result<CityCurrentWeatherEntity, MeteoWeatherDataError>) -> ()) {
         if let existingCity = localService?.checkSavedCity(with: getCityName(with: geocodedCity)) {
             print("Attention: conflit avec la ville de \(existingCity.name ?? "??")")

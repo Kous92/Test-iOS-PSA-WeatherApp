@@ -1,10 +1,10 @@
 # ``MeteoWeatherData``
 
-<!--@START_MENU_TOKEN@-->Summary<!--@END_MENU_TOKEN@-->
+This framework is used as data layer of MeteoWeather iOS app. It ensures modularity to follow the principles of the Clean Architecture.
 
 ## Overview
 
-<!--@START_MENU_TOKEN@-->Text<!--@END_MENU_TOKEN@-->
+Through this framework, you will have possibilities from the data repository to download data from OpenWeatherAPI and save data locally into a Core Data local database.
 
 ## Topics
 

@@ -8,12 +8,16 @@
 import Foundation
 import CoreData
 
+/// This class manages the Core Data local database service for data persistence, for retrieving, saving, updating and deleting data.
 public class MeteoWeatherCoreDataService: MeteoWeatherLocalService {
+    
+    /// The shared singleton object
     public static let shared = MeteoWeatherCoreDataService()
     
-    // Core Data requests
+    /// Core Data request to fetch location current weather data
     let cityFetchRequest = NSFetchRequest<CityCurrentWeatherEntity>(entityName: "CityCurrentWeatherEntity")
     
+    /// A container that encapsulates the Core Data stack. With a custom configuration to handle different operations.
     private lazy var persistentContainer: NSPersistentContainer? = {
         // Framework bundle ID and Core Data model name are needed to use a persistent container in a framework.
         let identifier: String = "com.kous92.MeteoWeatherData"
@@ -44,14 +48,21 @@ public class MeteoWeatherCoreDataService: MeteoWeatherLocalService {
         return container
     }()
     
-    // Returns localized city name if available or default name
+    /// Returns localized city name if available or default name
+    /// - Parameter geocodedCity: The object of the retrieved city from OpenWeather Geocoding API
+    /// - Returns: Localized city name if available or default name
     private func getCityName(with geocodedCity: GeocodedCity) -> String {
         return geocodedCity.localNames?["fr"] ?? geocodedCity.name
     }
     
-    // Saving data from server to Core Data
-    // -999 are default values if data was not available from the network API for temperatures
-    // -1 are default values if data was not available from the network API for others
+    /// Saves the downloaded data of the location into Core Data database. This operation is executed on the background thread.
+    /// - Parameters:
+    ///   - geocodedCity: The object of the retrieved city from OpenWeather Geocoding API
+    ///   - currentWeather: The object of the retrieved city from OpenWeather Current weather data API
+    ///   - completion: Closure to handle the result with saved entity if saving to the local database has succeeded, or an error if saving to the local database has failed.
+    ///
+    /// `-999` are default values if data was not available from the network API for temperatures.
+    /// `-1` are default values if data was not available from the network API for others.
     public func saveCityWeatherData(geocodedCity: GeocodedCity, currentWeather: CityCurrentWeather, completion: @escaping (Result<CityCurrentWeatherEntity, MeteoWeatherDataError>) -> ()) {
         self.persistentContainer?.performBackgroundTask { (context) in
             context.automaticallyMergesChangesFromParent = true
@@ -90,7 +101,11 @@ public class MeteoWeatherCoreDataService: MeteoWeatherLocalService {
         }
     }
     
-    // All transactions must be saved from the context (deletion, addition, update)
+    /// It saves all changes from deletion, addition, update operation, from the Core Data persistent container context. This operation can be executed on the main or background thread.
+    /// - Parameters:
+    ///   - operationDescription: For debugging, to describe which operation is processing
+    ///   - context: An object space to manipulate and track changes to managed objects. On main thread or backround thread.
+    ///   - completion: Closure to handle if saving operation in the context has succeeded, or an error if failed.
     private func saveData(operationDescription: String, context: NSManagedObjectContext, completion: (Result<Void, MeteoWeatherDataError>) -> ()) {
         // Save Data
         do {
@@ -103,6 +118,9 @@ public class MeteoWeatherCoreDataService: MeteoWeatherLocalService {
         }
     }
 
+    /// Checks if an entity is already saved in the Core Data local database, to avoid any conflict during saving, updating or deleting operation.
+    /// - Parameter name: The location of the weather entity, as filter (ex: Paris, Roma, London,...)
+    /// - Returns: The entity if found, or `nil` if not
     public func checkSavedCity(with name: String) -> CityCurrentWeatherEntity? {
         let filterPredicate = NSPredicate(format: "name LIKE[c] %@", name)
         cityFetchRequest.predicate = filterPredicate
@@ -124,6 +142,8 @@ public class MeteoWeatherCoreDataService: MeteoWeatherLocalService {
         }
     }
     
+    /// Retrieves all locations current weather data saved in the Core Data local database
+    /// - Parameter completion: Closure to handle the result with retrived saved entities if succeeded, or an error if failed.
     public func fetchAllCities(completion: @escaping (Result<[CityCurrentWeatherEntity], MeteoWeatherDataError>) -> ()) {
         guard let context = persistentContainer?.viewContext else {
             print("[MeteoWeatherCoreDataService] ❌ Erreur lors de la récupération des données de météo. Contexte indisponible.")
@@ -143,7 +163,10 @@ public class MeteoWeatherCoreDataService: MeteoWeatherLocalService {
         }
     }
     
-    // Main thread
+    /// Delete a saved entity from the Core Data local database. This operation is executed on the main thread.
+    /// - Parameters:
+    ///   - city: The entity with full weather data to delete,
+    ///   - completion: Closure to handle the result with if deletion has succeeded, or an error if failed.
     public func deleteCity(city: CityCurrentWeatherEntity, completion: @escaping (Result<Void, MeteoWeatherDataError>) -> ()) {
         guard let context = persistentContainer?.viewContext else {
             print("[MeteoWeatherCoreDataService] ❌ Erreur lors de la récupération du contexte.")
