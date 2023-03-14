@@ -20,6 +20,7 @@ final class CityWeatherTableViewCell: UITableViewCell {
     
     func setView() {
         cellFrame.layer.cornerRadius = 10
+        self.selectionStyle = .none
     }
     
     func setMinMaxTempView(min: String?, max: String?) {

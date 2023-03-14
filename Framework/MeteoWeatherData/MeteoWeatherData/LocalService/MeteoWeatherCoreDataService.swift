@@ -72,9 +72,7 @@ public class MeteoWeatherCoreDataService: MeteoWeatherLocalService {
             cityCurrentWeatherEntity.pressure = Int64(currentWeather.main?.pressure ?? -1)
             cityCurrentWeatherEntity.humidity = Int64(currentWeather.main?.humidity ?? 0)
             cityCurrentWeatherEntity.oneHourRain = currentWeather.rain?.oneHour ?? -1
-            cityCurrentWeatherEntity.threeHourRain = currentWeather.rain?.threeHour ?? -1
             cityCurrentWeatherEntity.oneHourSnow = currentWeather.snow?.oneHour ?? -1
-            cityCurrentWeatherEntity.threeHourSnow = currentWeather.snow?.threeHour ?? -1
             cityCurrentWeatherEntity.sunset = Int64(currentWeather.sys?.sunset ?? -1)
             cityCurrentWeatherEntity.sunrise = Int64(currentWeather.sys?.sunrise ?? -1)
             cityCurrentWeatherEntity.weatherIcon = currentWeather.weather?[0].icon

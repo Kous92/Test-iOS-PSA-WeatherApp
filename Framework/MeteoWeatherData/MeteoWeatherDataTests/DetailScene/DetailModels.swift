@@ -95,9 +95,8 @@ enum DetailEntity {
             let windSpeed: String
             let windGust: String
             let oneHourRain: String
-            let threeHourRain: String
             let oneHourSnow: String
-            let threeHourSnow: String
+            let lastUpdateTime: String
             
             // Some data may not be available
             let temperatureAvailable: Bool
@@ -105,9 +104,7 @@ enum DetailEntity {
             let minTemperatureAvailable: Bool
             let maxTemperatureAvailable: Bool
             let oneHourSnowAvailable: Bool
-            let threeHourSnowAvailable: Bool
             let oneHourRainAvailable: Bool
-            let threeHourRainAvailable: Bool
             let windSpeedAvailable: Bool
             let windGustAvailable: Bool
             
@@ -137,12 +134,9 @@ enum DetailEntity {
                 self.windGustAvailable = cityWeather.windGust != 1
                 self.oneHourRain = cityWeather.oneHourRain != -1 ? "\(round(cityWeather.oneHourRain)) mm" : "Aucune pluie"
                 self.oneHourRainAvailable = cityWeather.oneHourRain != -1
-                self.threeHourRain = cityWeather.threeHourRain != 1 ? "\(round(cityWeather.threeHourRain)) mm" : "Aucune pluie"
-                self.threeHourRainAvailable = cityWeather.threeHourRain != 1
-                self.oneHourSnow = cityWeather.oneHourSnow != 1 ? "\(round(cityWeather.oneHourSnow)) mm" : "Aucune chute de neige"
-                self.oneHourSnowAvailable = cityWeather.oneHourSnow != 1
-                self.threeHourSnow = cityWeather.threeHourSnow != 1 ? "\(round(cityWeather.threeHourSnow)) mm" : "Aucune chute de neige"
-                self.threeHourSnowAvailable = cityWeather.threeHourSnow != 1
+                self.oneHourSnow = cityWeather.oneHourSnow != -1 ? "\(round(cityWeather.oneHourSnow)) mm" : "Aucune chute de neige"
+                self.oneHourSnowAvailable = cityWeather.oneHourSnow != -1
+                self.lastUpdateTime = "Mise à jour: \(getDateTimeFromUnixTimestamp(timestamp: String(cityWeather.lastUpdateTime), option: .lastUpdate))"
             }
             
             func getCellConfigurations() -> [DetailStatsType] {
