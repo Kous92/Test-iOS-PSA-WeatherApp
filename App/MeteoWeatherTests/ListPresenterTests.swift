@@ -23,8 +23,6 @@ final class ListPresenterTests: XCTestCase {
 
     func testSuccess() {
         let presenter = ListPresenter()
-        
-        presenter.presentCities(response: )
     }
     
     func testFailure() {
