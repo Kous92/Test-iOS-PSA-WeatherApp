@@ -11,6 +11,7 @@ enum TimeOption {
     case hourTime
     case lastUpdate
 }
+
 // m/s to km/h (kph)
 func convertSpeed(speed: Double) -> String {
     if speed == -1 {
