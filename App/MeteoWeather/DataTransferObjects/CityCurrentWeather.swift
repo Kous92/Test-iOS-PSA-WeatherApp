@@ -35,13 +35,7 @@ struct CityCurrentWeather {
     
     init(with city: CityCurrentWeatherEntity) {
         self.name = city.name ?? "Ville inconnue"
-        
-        if let countryCode = city.country, let countryName = countryName(countryCode: countryCode) {
-            self.country = countryName
-        } else {
-            self.country = "??"
-        }
-        
+        self.country = city.country ?? ""
         self.weatherIcon = city.weatherIcon ?? ""
         self.weatherDescription = city.weatherDescription ?? "Aucune description"
         self.temperature = city.temperature
@@ -69,11 +63,9 @@ struct CityCurrentWeather {
             name: self.name,
             weatherDescription: self.weatherDescription.prefix(1).capitalized + self.weatherDescription.dropFirst().lowercased() ,
             iconImage: self.weatherIcon,
-            temperature: parseTemperature()
+            temperature: parseTemperature(with: self.temperature),
+            minTemperature: self.tempMin != -999 ? parseTemperature(with: self.tempMin) : nil,
+            maxTemperature: self.tempMax != -999 ? parseTemperature(with: self.tempMax) : nil
         )
-    }
-    
-    func parseTemperature() -> String {
-        return "\(Int(round(self.temperature)))°C"
     }
 }

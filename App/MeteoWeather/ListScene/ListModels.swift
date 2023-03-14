@@ -30,6 +30,8 @@ enum ListEntity {
             let weatherDescription: String
             let iconImage: String
             let temperature: String
+            let minTemperature: String?
+            let maxTemperature: String?
         }
         
         var cellViewModels: [CityViewModel]

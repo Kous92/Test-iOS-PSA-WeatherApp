@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_72" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="101" id="KGk-i7-Jjw" customClass="RainSnowTableViewCell" customModule="MeteoWeather" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="311" height="101"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="311" height="101"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LqC-PT-Wtk">
+                        <rect key="frame" x="10" y="10" width="291" height="81"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="60" translatesAutoresizingMaskIntoConstraints="NO" id="v6X-0V-jqw">
+                                <rect key="frame" x="10" y="10" width="271" height="61"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="MYT-I5-iCg">
+                                        <rect key="frame" x="0.0" y="0.0" width="171" height="61"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pluie / Neige" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4LR-wd-d3m">
+                                                <rect key="frame" x="0.0" y="0.0" width="107.66666666666667" height="30.666666666666668"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="30.666666666666668" id="tfa-87-33c"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="19"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="cGg-E9-9sH">
+                                                <rect key="frame" x="0.0" y="35.666666666666664" width="77" height="25.333333333333336"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1h: 10 mm" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1iW-I4-h7V">
+                                                        <rect key="frame" x="0.0" y="0.0" width="77" height="25.333333333333332"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                            </stackView>
+                                        </subviews>
+                                    </stackView>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="snowflake" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="oCy-Ee-PAa">
+                                        <rect key="frame" x="231" y="0.66666666666666785" width="40" height="59.666666666666657"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="40" id="QYd-ht-bwC"/>
+                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="40" id="YiW-8N-1ps"/>
+                                        </constraints>
+                                    </imageView>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.01044868086" green="0.0" blue="0.83458843429999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <constraints>
+                            <constraint firstItem="v6X-0V-jqw" firstAttribute="top" secondItem="LqC-PT-Wtk" secondAttribute="top" constant="10" id="Af9-j7-AK9"/>
+                            <constraint firstItem="v6X-0V-jqw" firstAttribute="leading" secondItem="LqC-PT-Wtk" secondAttribute="leading" constant="10" id="Xu6-Nc-ZfL"/>
+                            <constraint firstAttribute="trailing" secondItem="v6X-0V-jqw" secondAttribute="trailing" constant="10" id="YIY-vt-auA"/>
+                            <constraint firstAttribute="bottom" secondItem="v6X-0V-jqw" secondAttribute="bottom" constant="10" id="w9N-12-Vxb"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                <constraints>
+                    <constraint firstItem="LqC-PT-Wtk" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="KFe-vJ-YXN"/>
+                    <constraint firstAttribute="bottom" secondItem="LqC-PT-Wtk" secondAttribute="bottom" constant="10" id="OOH-ai-xXk"/>
+                    <constraint firstItem="LqC-PT-Wtk" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="Okf-Co-eee"/>
+                    <constraint firstAttribute="trailing" secondItem="LqC-PT-Wtk" secondAttribute="trailing" constant="10" id="uTe-LE-2Lr"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <connections>
+                <outlet property="cellFrame" destination="LqC-PT-Wtk" id="2l3-ON-fw9"/>
+                <outlet property="oneHourLabel" destination="1iW-I4-h7V" id="pA6-1I-iIY"/>
+                <outlet property="rainSnowImage" destination="oCy-Ee-PAa" id="Ni1-N9-2Uj"/>
+                <outlet property="rainSnowTitle" destination="4LR-wd-d3m" id="yxL-kH-bsN"/>
+            </connections>
+            <point key="canvasLocation" x="117.90697674418604" y="28.004291845493565"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="snowflake" catalog="system" width="119" height="128"/>
+    </resources>
+</document>

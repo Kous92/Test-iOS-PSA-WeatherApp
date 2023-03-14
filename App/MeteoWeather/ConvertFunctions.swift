@@ -13,9 +13,11 @@ enum TimeOption {
 }
 // m/s to km/h (kph)
 func convertSpeed(speed: Double) -> String {
-    let kph = speed * 3.6
+    if speed == -1 {
+        return "Indisponible"
+    }
     
-    return "\(kph) km/h"
+    return String(format: "%.2f km/h", speed * 3.6)
 }
 
 func parseTemperature(with temperature: Double) -> String {
