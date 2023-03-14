@@ -16,13 +16,18 @@ public final class MeteoWeatherDataNetworkAPIService: MeteoWeatherDataAPIService
         
     }
     
-    /// Downloads, retrieves and decodes from JSON the geocoded city with name, country and GPS position. This version supports Swift Concurrency to be used in an `async` task (`Task`).
+    /// Downloads, retrieves and decodes from JSON the geocoded city with name, country and GPS position. This method supports Swift Concurrency to be used in an `async` task (`Task`).
     /// - Parameter query: the name of location to search
     /// - Returns: The object of the retrieved city from OpenWeatherAPI Geocoding API
     public func fetchGeocodedCity(query: String) async -> Result<[GeocodedCity], MeteoWeatherDataError> {
         await getRequest(endpoint: .geocoding(cityName: query))
     }
     
+    /// Downloads, retrieves and decodes from JSON  the full current weather of a city. This method supports Swift Concurrency to be used in an `async` task (`Task`).
+    /// - Parameters:
+    ///   - lat: Geographical coordinates of the found location (latitude)
+    ///   - lon: Geographical coordinates of the found location (longitude)
+    /// - Returns: The result of the fetch operation. An object of the retrieved city current weather from OpenWeatherAPI Geocoding API if it has succeeded, an error if it fails.
     public func fetchCurrentCityWeather(lat: Double, lon: Double) async -> Result<CityCurrentWeather, MeteoWeatherDataError> {
         await getRequest(endpoint: .currentWeather(lat: lat, lon: lon))
     }
@@ -34,6 +39,11 @@ public final class MeteoWeatherDataNetworkAPIService: MeteoWeatherDataAPIService
         getRequest(endpoint: .geocoding(cityName: query), completion: completion)
     }
     
+    /// Downloads, retrieves and decodes from JSON  the full current weather of a city.
+    /// - Parameters:
+    ///   - lat: Geographical coordinates of the found location (latitude)
+    ///   - lon: Geographical coordinates of the found location (longitude)
+    /// - Returns: The result of the fetch operation. An object of the retrieved city current weather from OpenWeather Current weather data API if it has succeeded, an error if it fails.
     public func fetchCurrentCityWeather(lat: Double, lon: Double, completion: @escaping (Result<CityCurrentWeather, MeteoWeatherDataError>) -> ()) {
         getRequest(endpoint: .currentWeather(lat: lat, lon: lon), completion: completion)
     }

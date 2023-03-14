@@ -27,7 +27,7 @@ final class ListViewController: UIViewController, AddDataDelegate {
     
     // Setting Clean Swift components
     private func setup() {
-        let interactor = ListInteractor()
+        let interactor = ListInteractor(worker: ListWorker())
         let presenter = ListPresenter()
         let router = ListRouter()
         self.interactor = interactor
