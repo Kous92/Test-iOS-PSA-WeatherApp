@@ -11,15 +11,12 @@ import Foundation
 final class ListMockPresenter: ListPresentationLogic {
     weak var view: ListDisplayLogic?
     
-    
-    
     func presentCities(response: MeteoWeather.ListEntity.Response) {
-        view?.updateCityList(with: )
+        // view?.updateCityList(with: )
         
-        view?.displayErrorMessage(with: "")
+        // view?.displayErrorMessage(with: "")
     }
     
     func notifyDeletion(response: MeteoWeather.ListEntity.DeleteCity.Response) {
-        view?.
     }
 }
