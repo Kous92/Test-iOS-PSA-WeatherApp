@@ -77,5 +77,21 @@ Pour ce test technique de haut niveau, j'ai mis en place une **Clean Architectur
 - UIKit
 - Combine (Programmation réactive fonctionnelle)
 - Core Data (persistance des données)
+- XCTest (tests unitaires)
 
 L'utilisation de frameworks externes à Apple est interdite (RxSwift, Alamofire, Kingfisher,...) dans ce test.
+
+La documentation est disponible pour le framework.
+
+### Tests unitaires implémentés:
+- Framework: Service réseau, service local
+- App: Presenters liste et ajout.
+
+## Difficultés
+
+Du fait que ce test soit très long et très complexe pour un délai court de 6 jours, par manque de temps:
+- Je n'ai pas pu aller jusqu'au bout pour écrire l'ensemble des tests unitaires pour le framework, il me manque la partie repository. L'approche TDD (Test Driven Development) me demanderait 2 à 3 fois plus de temps pour la mettre en place.
+- Faire le diagramme de séquence.
+
+Au niveau technique:
+- L'API n'est pas adaptée pour mettre à jour directement l'ensemble de la liste. Il faudrait chaîner les requêtes puis la sauvegarde, engendrant ainsi des problèmes de synchronisation (allant au deadlock) et de la corruption de données. De plus, l'utilisation de l'API est très limitée, 60 requêtes/minute.
