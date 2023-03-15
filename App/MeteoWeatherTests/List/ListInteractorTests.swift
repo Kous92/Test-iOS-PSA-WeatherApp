@@ -6,3 +6,12 @@
 //
 
 import Foundation
+import XCTest
+@testable import MeteoWeather
+@testable import MeteoWeatherData
+
+final class ListInteractorTests: XCTestCase {
+    func testInteractor() {
+        
+    }
+}

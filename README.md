@@ -9,6 +9,7 @@ Test technique officiel de Stellantis (PSA), réalisé par Koussaïla BEN MAMAR,
     + [Contexte technique](#contexte)
     + [Contraintes](#contrainte)
 - [Ma solution](#solution)
+- [Guide d'utilisation de l'app](#userguide)
 
 ## <a name="objectif"></a>Objectifs
 
@@ -89,9 +90,44 @@ La documentation est disponible pour le framework.
 
 ## Difficultés
 
-Du fait que ce test soit très long et très complexe pour un délai court de 6 jours, par manque de temps:
+**Du fait que ce test soit très long et très complexe pour un délai court de 6 jours, par manque de temps**:
 - Je n'ai pas pu aller jusqu'au bout pour écrire l'ensemble des tests unitaires pour le framework, il me manque la partie repository. L'approche TDD (Test Driven Development) me demanderait 2 à 3 fois plus de temps pour la mettre en place.
 - Faire le diagramme de séquence.
 
-Au niveau technique:
+**Au niveau technique**:
 - L'API n'est pas adaptée pour mettre à jour directement l'ensemble de la liste. Il faudrait chaîner les requêtes puis la sauvegarde, engendrant ainsi des problèmes de synchronisation (allant au deadlock) et de la corruption de données. De plus, l'utilisation de l'API est très limitée, 60 requêtes/minute.
+
+## <a name="userguide"></a>Guide d'utilisation de l'app
+
+L'application se compose en 3 écrans.
+
+### Écran liste
+
+Cet écran récupère les données sauvegardées dans la base de données locale et affiche une liste de villes avec leurs données météo respectives, s'il y a des données en base.
+
+Tapez sur une cellule de la liste pour afficher l'écran avec les détails.
+
+Pour ajouter la météo d'une ville, tapez sur le bouton + .
+
+![ListScreen](ListScreen.png)
+
+### Écran ajout
+
+C'est ici que vous pouvez ajouter une nouvelle ville avec ses données météo. Tapez un lieu dans la barre de recherche, et l'application téléchargera et afficher en auto-complétion une liste de suggestions. Sélectionnez la ville parmi les suggestions de votre recherche et l'écran ajout se fermera pour revenir à l'écran de la liste. 
+
+Une fois la ville sélectionnée, l'application téléchargera les données de météo et les sauvegardera dans la base de données locale. L'écran principal actualisera automatiquement la liste avec la nouvelle ville ajoutée. Notez que si vous recherchez une ville qui est déjà sauvegardée, ses données seront mises à jour.
+
+![AddScreen](AddScreen.png)
+
+### Écran détail
+
+C'est ici que vous pouvez consulter l'ensemble des données météo à l'heure actuelle avec les détails:
+- Température: actuelle, ressentie, minimum, maximum
+- Vent: vitesse et rafale
+- Heure du lever et du coucher du soleil
+- Pression atmosphérique
+- Humidité
+- Visibilité
+- Pluie / Neige si disponible
+
+![DetailScreen](DetailScreen.png)
