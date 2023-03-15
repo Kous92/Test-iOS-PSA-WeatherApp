@@ -9,7 +9,7 @@ import Foundation
 
 final class ListInteractor: ListDataStore {
     // Data Store
-    var cities = [CityCurrentWeather]()
+    var cities = [CityCurrentWeatherOutput]()
     var presenter: ListPresentationLogic?
     private var worker: ListWorker
     

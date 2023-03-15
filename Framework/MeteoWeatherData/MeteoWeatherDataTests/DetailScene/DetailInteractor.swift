@@ -8,7 +8,7 @@
 import Foundation
 
 final class DetailInteractor: DetailDataStore, DetailBusinessLogic {
-    var cityWeather: CityCurrentWeather?
+    var cityWeather: CityCurrentWeatherOutput?
     var presenter: DetailPresenter?
     
     func getPassedCityWeather() {

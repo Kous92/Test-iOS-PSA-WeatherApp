@@ -24,7 +24,7 @@ protocol DetailPresentationLogic: AnyObject {
 
 // Depuis l'Interactor, les données seront stockées. Particularité, ce Data Store sera initialisé avec une donnée du routeur provenant d'un autre Data Store
 protocol DetailDataStore: AnyObject {
-    var cityWeather: CityCurrentWeather? { get set }
+    var cityWeather: CityCurrentWeatherOutput? { get set }
 }
 
 // The router have only data retrieval from previous view as responsibility

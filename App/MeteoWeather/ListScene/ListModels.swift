@@ -21,7 +21,7 @@ enum ListEntity {
     }
     
     struct Response {
-        let result: Result<[CityCurrentWeather], MeteoWeatherDataError>
+        let result: Result<[CityCurrentWeatherOutput], MeteoWeatherDataError>
     }
     
     struct ViewModel {
