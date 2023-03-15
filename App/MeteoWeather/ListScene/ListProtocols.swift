@@ -35,7 +35,7 @@ protocol ListRoutingLogic: AnyObject {
 
 // From the interactor, the data will be stored here. The router will retrieve the wanted data to pass it to an other view through an other DataStore.
 protocol ListDataStore: AnyObject {
-    var cities: [CityCurrentWeather] { get }
+    var cities: [CityCurrentWeatherOutput] { get }
 }
 
 protocol ListDataPassing {

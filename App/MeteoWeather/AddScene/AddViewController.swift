@@ -38,7 +38,7 @@ final class AddViewController: UIViewController {
     
     // Setting Clean Swift components
     private func setup() {
-        let interactor = AddInteractor()
+        let interactor = AddInteractor(worker: AddWorker())
         let presenter = AddPresenter()
         let router = AddRouter()
         interactor.presenter = presenter

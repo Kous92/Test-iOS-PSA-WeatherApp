@@ -12,7 +12,7 @@ final class ListPresenter {
     // The VIP cycle requires a weak reference to avoid a memory leak: View -> Interactor -> Presenter -> View
     weak var view: ListDisplayLogic?
     
-    private func parseViewModels(with cities: [CityCurrentWeather]) -> [ListEntity.ViewModel.CityViewModel] {
+    private func parseViewModels(with cities: [CityCurrentWeatherOutput]) -> [ListEntity.ViewModel.CityViewModel] {
         var viewModels = [ListEntity.ViewModel.CityViewModel]()
         cities.forEach { viewModels.append($0.getCityViewModel()) }
         return viewModels

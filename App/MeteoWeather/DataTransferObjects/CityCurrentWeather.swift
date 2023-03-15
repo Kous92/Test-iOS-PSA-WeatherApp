@@ -9,7 +9,7 @@ import Foundation
 import MeteoWeatherData
 
 // Data Transfer Object between app layer and data layer
-struct CityCurrentWeather {
+struct CityCurrentWeatherOutput {
     let name: String
     let country: String
     let weatherIcon: String
@@ -52,6 +52,29 @@ struct CityCurrentWeather {
         self.oneHourRain = city.oneHourRain
         self.oneHourSnow = city.oneHourSnow
         self.lastUpdateTime = Int(city.lastUpdateTime)
+    }
+    
+    init(name: String, country: String, weatherIcon: String, weatherDescription: String, temperature: Double, feelsLike: Double, tempMin: Double, tempMax: Double, lon: Double, lat: Double, sunset: Int, sunrise: Int, pressure: Int, humidity: Int, cloudiness: Int, windSpeed: Double, windGust: Double, oneHourRain: Double, oneHourSnow: Double, lastUpdateTime: Int) {
+        self.name = name
+        self.country = country
+        self.weatherIcon = weatherIcon
+        self.weatherDescription = weatherDescription
+        self.temperature = temperature
+        self.feelsLike = feelsLike
+        self.tempMin = tempMin
+        self.tempMax = tempMax
+        self.lon = lon
+        self.lat = lat
+        self.sunset = sunset
+        self.sunrise = sunrise
+        self.pressure = pressure
+        self.humidity = humidity
+        self.cloudiness = cloudiness
+        self.windSpeed = windSpeed
+        self.windGust = windGust
+        self.oneHourRain = oneHourRain
+        self.oneHourSnow = oneHourSnow
+        self.lastUpdateTime = lastUpdateTime
     }
     
     func getCityViewModel() -> ListEntity.ViewModel.CityViewModel {

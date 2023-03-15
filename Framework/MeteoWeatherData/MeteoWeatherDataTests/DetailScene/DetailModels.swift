@@ -21,7 +21,7 @@ enum DetailStatsType {
 enum DetailEntity {
     enum WeatherDetails {
         struct Response {
-            var cityWeather: CityCurrentWeather
+            var cityWeather: CityCurrentWeatherOutput
         }
         
         struct WindViewModel {
@@ -110,7 +110,7 @@ enum DetailEntity {
             
             // -999 are default values if data was not available from the network API for temperatures
             // -1 are default values if data was not available from the network API for others
-            init(cityWeather: CityCurrentWeather) {
+            init(cityWeather: CityCurrentWeatherOutput) {
                 self.name = cityWeather.name
                 self.country = cityWeather.country
                 self.weatherIcon = cityWeather.weatherIcon

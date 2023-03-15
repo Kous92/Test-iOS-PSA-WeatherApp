@@ -12,8 +12,8 @@ final class AddInteractor: AddDataStore {
     var presenter: AddPresentationLogic?
     private var worker: AddWorker
     
-    init() {
-        self.worker = AddWorker()
+    init(worker: AddWorker) {
+        self.worker = worker
     }
 }
 

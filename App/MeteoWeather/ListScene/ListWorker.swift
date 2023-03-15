@@ -52,9 +52,9 @@ final class ListWorker {
         }
     }
     
-    private func parseToLocalAppEntities(with entities: [CityCurrentWeatherEntity]) -> [CityCurrentWeather] {
-        var localEntities = [CityCurrentWeather]()
-        entities.forEach { localEntities.append(CityCurrentWeather(with: $0)) }
+    private func parseToLocalAppEntities(with entities: [CityCurrentWeatherEntity]) -> [CityCurrentWeatherOutput] {
+        var localEntities = [CityCurrentWeatherOutput]()
+        entities.forEach { localEntities.append(CityCurrentWeatherOutput(with: $0)) }
         
         return localEntities
     }
