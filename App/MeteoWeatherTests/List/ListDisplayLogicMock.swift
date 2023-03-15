@@ -12,7 +12,7 @@ final class ListDisplayLogicMock: ListDisplayLogic {
     
     var invokedUpdateCityList = false
     var invokedUpdateCityListCount = 0
-    var invokedUpdateCityListParameters = [MeteoWeather.ListEntity.ViewModel]()
+    var invokedUpdateCityListParameters = [MeteoWeather.ListEntity.ViewModel.CityViewModel]()
     
     var invokedDisplayErrorMessage = false
     var invokedDisplayErrorMessageCount = 0
@@ -25,7 +25,7 @@ final class ListDisplayLogicMock: ListDisplayLogic {
     func updateCityList(with viewModel: MeteoWeather.ListEntity.ViewModel) {
         invokedUpdateCityList = true
         invokedUpdateCityListCount += 1
-        invokedUpdateCityListParameters.append(viewModel)
+        invokedUpdateCityListParameters = viewModel.cellViewModels
     }
     
     func displayErrorMessage(with viewModel: MeteoWeather.ListEntity.ViewModel.Error) {

@@ -25,6 +25,15 @@ struct CitySearchOutput {
         self.state = geocodedCity.state
     }
     
+    init(name: String, localNames: [String : String]? = nil, lat: Double, lon: Double, country: String, state: String? = nil) {
+        self.name = name
+        self.localNames = localNames
+        self.lat = lat
+        self.lon = lon
+        self.country = country
+        self.state = state
+    }
+    
     func getCityViewModel() -> AddEntity.ViewModel.CityViewModel {
         return AddEntity.ViewModel.CityViewModel(
             name: self.getCityFullName()
