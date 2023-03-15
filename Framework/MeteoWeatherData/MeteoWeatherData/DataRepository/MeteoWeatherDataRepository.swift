@@ -34,7 +34,8 @@ public class MeteoWeatherDataRepository {
     /// - Parameters:
     ///   - geocodedCity: The object of the retrieved city from OpenWeatherAPI Geocoding API
     ///   - completion: Closure to handle the result with saved entity if saving to the local database has succeeded, or an error if saving to the local database has failed.
-    public func addCity(with geocodedCity: GeocodedCity, completion: @escaping (Result<CityCurrentWeatherEntity, MeteoWeatherDataError>) -> ()) {
+    public func addCity(with geocodedCity: GeocodedCity, completion: @escaping (Result<CityCurrentWeatherLocalEntity, MeteoWeatherDataError>) -> ()) {
+        /*
         if let existingCity = localService?.checkSavedCity(with: getCityName(with: geocodedCity)) {
             print("Attention: conflit avec la ville de \(existingCity.name ?? "??")")
             
@@ -48,6 +49,19 @@ public class MeteoWeatherDataRepository {
                 
                 print("Mise à jour des données météo de la ville de \(existingCity.name ?? "??")")
             }
+        }
+        */
+        let cityName = getCityName(with: geocodedCity)
+        
+        localService?.deleteCity(cityName: getCityName(with: geocodedCity)) { result in
+            if case .failure(let error) = result {
+                print("Attention: la ville déjà existante n'a pas pu être supprimée \(cityName)")
+                completion(.failure(error))
+                
+                return
+            }
+            
+            print("Mise à jour des données météo de la ville de \(cityName)")
         }
         
         print("-> 2.1: Téléchargement des nouvelles données de \(geocodedCity.name)...")
@@ -63,18 +77,34 @@ public class MeteoWeatherDataRepository {
     }
     
     // Fetches all cities with their respective data, saved locally
-    public func fetchAllCities(completion: @escaping (Result<[CityCurrentWeatherEntity], MeteoWeatherDataError>) -> ()) {
+    public func fetchAllCities(completion: @escaping (Result<[CityCurrentWeatherLocalEntity], MeteoWeatherDataError>) -> ()) {
         localService?.fetchAllCities(completion: completion)
     }
     
     // Delete a city, saved locally
     public func deleteCity(with name: String, completion: @escaping (Result<Void, MeteoWeatherDataError>) -> ()) {
         // Retrieve the existing entity
+        localService?.deleteCity(cityName: name) { result in
+            completion(result)
+            /*
+            if case .failure(let error) = result {
+                print("Attention: la ville déjà existante n'a pas pu être supprimée \(cityName)")
+                completion(.failure(error))
+                
+                return
+            }
+            
+            print("Mise à jour des données météo de la ville de \(cityName)")
+             */
+        }
+        
+        /*
         if let cityToDelete = localService?.checkSavedCity(with: name) {
             print("La ville de \(name) sera supprimée")
-           localService?.deleteCity(city: cityToDelete) { result in
+            localService?.deleteCity(city: cityToDelete) { result in
                 completion(result)
             }
         }
+         */
     }
 }

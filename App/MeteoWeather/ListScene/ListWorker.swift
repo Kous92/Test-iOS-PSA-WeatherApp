@@ -39,7 +39,7 @@ final class ListWorker {
         }
     }
     
-    private func handleResult(with result: Result<[CityCurrentWeatherEntity], MeteoWeatherDataError>) -> ListEntity.Response {
+    private func handleResult(with result: Result<[CityCurrentWeatherLocalEntity], MeteoWeatherDataError>) -> ListEntity.Response {
         print("4) [List] Worker: Renvoi de la réponse à l'Interactor.")
         switch result {
             case .success(let output):
@@ -52,7 +52,7 @@ final class ListWorker {
         }
     }
     
-    private func parseToLocalAppEntities(with entities: [CityCurrentWeatherEntity]) -> [CityCurrentWeatherOutput] {
+    private func parseToLocalAppEntities(with entities: [CityCurrentWeatherLocalEntity]) -> [CityCurrentWeatherOutput] {
         var localEntities = [CityCurrentWeatherOutput]()
         entities.forEach { localEntities.append(CityCurrentWeatherOutput(with: $0)) }
         
