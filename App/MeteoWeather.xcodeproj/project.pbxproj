@@ -29,6 +29,9 @@
 		4B2C182029C0F6C700745E99 /* ListPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B2C181F29C0F6C700745E99 /* ListPresenterTests.swift */; };
 		4B64129F29C1C14600915DD9 /* ListDisplayLogicMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B64129E29C1C14600915DD9 /* ListDisplayLogicMock.swift */; };
 		4B6412A329C1C3B200915DD9 /* CityCurrentWeatherDataMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B6412A229C1C3B200915DD9 /* CityCurrentWeatherDataMock.swift */; };
+		4B6412A929C1CF5200915DD9 /* AddPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B6412A829C1CF5200915DD9 /* AddPresenterTests.swift */; };
+		4B6412AB29C1CF6100915DD9 /* AddDisplayLogicMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B6412AA29C1CF6100915DD9 /* AddDisplayLogicMock.swift */; };
+		4B6412AE29C1D1B600915DD9 /* CitySearchOutputDataMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B6412AD29C1D1B600915DD9 /* CitySearchOutputDataMock.swift */; };
 		4B829F3329BF979400050D78 /* DetailProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B829F3229BF979400050D78 /* DetailProtocols.swift */; };
 		4B829F3729BF97B500050D78 /* DetailInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B829F3629BF97B500050D78 /* DetailInteractor.swift */; };
 		4B829F3929BF97D100050D78 /* DetailPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B829F3829BF97D100050D78 /* DetailPresenter.swift */; };
@@ -117,6 +120,9 @@
 		4B2C181F29C0F6C700745E99 /* ListPresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListPresenterTests.swift; sourceTree = "<group>"; };
 		4B64129E29C1C14600915DD9 /* ListDisplayLogicMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListDisplayLogicMock.swift; sourceTree = "<group>"; };
 		4B6412A229C1C3B200915DD9 /* CityCurrentWeatherDataMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityCurrentWeatherDataMock.swift; sourceTree = "<group>"; };
+		4B6412A829C1CF5200915DD9 /* AddPresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPresenterTests.swift; sourceTree = "<group>"; };
+		4B6412AA29C1CF6100915DD9 /* AddDisplayLogicMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddDisplayLogicMock.swift; sourceTree = "<group>"; };
+		4B6412AD29C1D1B600915DD9 /* CitySearchOutputDataMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CitySearchOutputDataMock.swift; sourceTree = "<group>"; };
 		4B829F3229BF979400050D78 /* DetailProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailProtocols.swift; sourceTree = "<group>"; };
 		4B829F3629BF97B500050D78 /* DetailInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailInteractor.swift; sourceTree = "<group>"; };
 		4B829F3829BF97D100050D78 /* DetailPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPresenter.swift; sourceTree = "<group>"; };
@@ -257,12 +263,39 @@
 		4B2C181529C0F67300745E99 /* MeteoWeatherTests */ = {
 			isa = PBXGroup;
 			children = (
+				4B6412AC29C1D19D00915DD9 /* DataMocks */,
+				4B6412A529C1CF2800915DD9 /* Add */,
+				4B6412A429C1CF0F00915DD9 /* List */,
 				4B2C181629C0F67300745E99 /* MeteoWeatherTests.swift */,
-				4B2C181F29C0F6C700745E99 /* ListPresenterTests.swift */,
-				4B64129E29C1C14600915DD9 /* ListDisplayLogicMock.swift */,
-				4B6412A229C1C3B200915DD9 /* CityCurrentWeatherDataMock.swift */,
 			);
 			path = MeteoWeatherTests;
+			sourceTree = "<group>";
+		};
+		4B6412A429C1CF0F00915DD9 /* List */ = {
+			isa = PBXGroup;
+			children = (
+				4B64129E29C1C14600915DD9 /* ListDisplayLogicMock.swift */,
+				4B2C181F29C0F6C700745E99 /* ListPresenterTests.swift */,
+			);
+			path = List;
+			sourceTree = "<group>";
+		};
+		4B6412A529C1CF2800915DD9 /* Add */ = {
+			isa = PBXGroup;
+			children = (
+				4B6412A829C1CF5200915DD9 /* AddPresenterTests.swift */,
+				4B6412AA29C1CF6100915DD9 /* AddDisplayLogicMock.swift */,
+			);
+			path = Add;
+			sourceTree = "<group>";
+		};
+		4B6412AC29C1D19D00915DD9 /* DataMocks */ = {
+			isa = PBXGroup;
+			children = (
+				4B6412A229C1C3B200915DD9 /* CityCurrentWeatherDataMock.swift */,
+				4B6412AD29C1D1B600915DD9 /* CitySearchOutputDataMock.swift */,
+			);
+			name = DataMocks;
 			sourceTree = "<group>";
 		};
 		4BAF0CCF29C082B10040290F /* DetailCells */ = {
@@ -468,10 +501,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4B6412A929C1CF5200915DD9 /* AddPresenterTests.swift in Sources */,
 				4B2C181729C0F67300745E99 /* MeteoWeatherTests.swift in Sources */,
 				4B6412A329C1C3B200915DD9 /* CityCurrentWeatherDataMock.swift in Sources */,
+				4B6412AB29C1CF6100915DD9 /* AddDisplayLogicMock.swift in Sources */,
 				4B2C182029C0F6C700745E99 /* ListPresenterTests.swift in Sources */,
 				4B64129F29C1C14600915DD9 /* ListDisplayLogicMock.swift in Sources */,
+				4B6412AE29C1D1B600915DD9 /* CitySearchOutputDataMock.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

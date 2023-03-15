@@ -46,7 +46,6 @@ final class ListPresenterTests: XCTestCase {
         presenter.view = view
         
         presenter.notifyDeletion(response: ListEntity.DeleteCity.Response(result: .success(IndexPath(row: 0, section: 0))))
-        presenter.presentCities(response: ListEntity.Response(result: .failure(.apiError)))
         XCTAssertTrue(view.invokedCompleteDeletion)
         XCTAssertEqual(view.invokedCompleteDeletionCount, 1)
         XCTAssertNotNil(view.invokedCompleteDeletionParameter)
