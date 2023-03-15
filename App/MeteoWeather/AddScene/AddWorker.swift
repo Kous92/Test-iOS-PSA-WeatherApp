@@ -9,15 +9,15 @@ import Foundation
 import MeteoWeatherData
 
 final class AddWorker {
-    private var repository: MeteoWeatherDataRepository
+    private var repository: MeteoWeatherDataRepositoryProtocol?
     
-    init() {
-        self.repository = MeteoWeatherDataRepository(networkService: MeteoWeatherDataNetworkAPIService(), localService: MeteoWeatherCoreDataService.shared)
+    init(repository: MeteoWeatherDataRepositoryProtocol) {
+        self.repository = repository
     }
     
     func searchCities(request: AddEntity.SearchCity.Request, completion: @escaping (_ response: AddEntity.SearchCity.Response) -> ()) {
         print("3) [Add] Worker: Recherche de villes pour \(request.query)...")
-        repository.searchCity(with: request.query) { [weak self] result in
+        repository?.searchCity(with: request.query) { [weak self] result in
             if let self {
                 completion(self.handleResult(with: result))
             }
@@ -27,11 +27,11 @@ final class AddWorker {
     func addCity(with city: CitySearchOutput, completion: @escaping (_ response: AddEntity.AddCity.Response) -> ()) {
         let geocodedCity = city.getGeocodedCity()
         print("3) [Add] Worker: Ajout de la météo de \(city.name)...")
-        repository.addCity(with: geocodedCity) { result in
+        repository?.addCity(with: geocodedCity) { result in
             print("4) [Add] Worker: Renvoi de la réponse à l'Interactor.")
             switch result {
                 case .success(let entity):
-                    print("-> 4.1) [Add] Les données de \(entity.name ?? "??") ont été sauvegardées en base locale.")
+                    print("-> 4.1) [Add] Les données de \(entity.name) ont été sauvegardées en base locale.")
                     completion(AddEntity.AddCity.Response(result: .success(())))
                 case .failure(let error):
                     print("-> 4.1) [Add] Échec: une erreur est survenue.")

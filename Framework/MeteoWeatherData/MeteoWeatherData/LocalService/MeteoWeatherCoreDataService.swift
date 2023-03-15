@@ -97,6 +97,7 @@ public class MeteoWeatherCoreDataService: MeteoWeatherLocalService {
                         print(localEntity)
                         completion(.success(localEntity))
                     case .failure(let error):
+                        print("[ATTENTION] \(error.rawValue)")
                         completion(.failure(error))
                 }
             }
@@ -116,6 +117,7 @@ public class MeteoWeatherCoreDataService: MeteoWeatherLocalService {
             completion(.success(()))
         } catch {
             print("[MeteoWeatherCoreDataService] ❌ \(operationDescription): échec.\n\(error)")
+            print("[ATTENTION] \(MeteoWeatherDataError.localDatabaseSavingError.rawValue)")
             completion(.failure(.localDatabaseSavingError))
         }
     }

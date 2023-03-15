@@ -9,16 +9,16 @@ import Foundation
 import MeteoWeatherData
 
 final class ListWorker {
-    private var repository: MeteoWeatherDataRepository
+    private var repository: MeteoWeatherDataRepositoryProtocol?
     
-    init() {
+    init(repository: MeteoWeatherDataRepositoryProtocol) {
         // Network calls are not needed
-        self.repository = MeteoWeatherDataRepository(networkService: nil, localService: MeteoWeatherCoreDataService.shared)
+        self.repository = repository
     }
     
     func fetchCitiesData(completion: @escaping (_ response: ListEntity.Response) -> ()) {
         print("3) [List] Worker: Récupération des données locales s'il y en a.")
-        repository.fetchAllCities { [weak self] result in
+        repository?.fetchAllCities { [weak self] result in
             if let self {
                 completion(self.handleResult(with: result))
             }
@@ -27,7 +27,7 @@ final class ListWorker {
     
     func deleteCityData(request: ListEntity.DeleteCity.Request, completion: @escaping (_ response: ListEntity.DeleteCity.Response) -> ()) {
         print("3) [List] Worker: Lancement de la suppression des données de \(request.name).")
-        repository.deleteCity(with: request.name) { result in
+        repository?.deleteCity(with: request.name) { result in
             switch result {
                 case .success():
                     print("-> 4.1) [List] Suppression terminée de \(request.name).")
