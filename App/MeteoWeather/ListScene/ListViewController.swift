@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import MeteoWeatherData
 
 final class ListViewController: UIViewController, AddDataDelegate {
     
@@ -27,7 +28,9 @@ final class ListViewController: UIViewController, AddDataDelegate {
     
     // Setting Clean Swift components
     private func setup() {
-        let interactor = ListInteractor(worker: ListWorker())
+        // Network calls are not needed
+        let repository = MeteoWeatherDataRepository(networkService: nil, localService: MeteoWeatherCoreDataService.shared)
+        let interactor = ListInteractor(worker: ListWorker(repository: repository))
         let presenter = ListPresenter()
         let router = ListRouter()
         self.interactor = interactor

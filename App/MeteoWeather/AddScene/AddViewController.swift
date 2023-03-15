@@ -7,6 +7,7 @@
 
 import UIKit
 import Combine
+import MeteoWeatherData
 
 final class AddViewController: UIViewController {
     // Clean Swift
@@ -38,7 +39,8 @@ final class AddViewController: UIViewController {
     
     // Setting Clean Swift components
     private func setup() {
-        let interactor = AddInteractor(worker: AddWorker())
+        let repository = MeteoWeatherDataRepository(networkService: MeteoWeatherDataNetworkAPIService(), localService: MeteoWeatherCoreDataService.shared)
+        let interactor = AddInteractor(worker: AddWorker(repository: repository))
         let presenter = AddPresenter()
         let router = AddRouter()
         interactor.presenter = presenter

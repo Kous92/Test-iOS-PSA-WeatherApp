@@ -8,7 +8,7 @@
 import Foundation
 
 /// The link between app layer and data layer of MeteoWeather app Clean Architecture. This class follows the Repository design pattern to provide an abstraction of data part, as interface to retrieve, save and delete data.
-public class MeteoWeatherDataRepository {
+public class MeteoWeatherDataRepository: MeteoWeatherDataRepositoryProtocol {
     private let networkService: MeteoWeatherDataAPIService?
     private let localService: MeteoWeatherLocalService?
     
@@ -37,27 +37,25 @@ public class MeteoWeatherDataRepository {
     public func addCity(with geocodedCity: GeocodedCity, completion: @escaping (Result<CityCurrentWeatherLocalEntity, MeteoWeatherDataError>) -> ()) {
         let cityName = getCityName(with: geocodedCity)
         
-        localService?.deleteCity(cityName: getCityName(with: geocodedCity)) { result in
-            if case .failure(let error) = result {
-                print("Attention: la ville déjà existante n'a pas pu être supprimée \(cityName)")
-                completion(.failure(error))
-                
-                return
+        // Deletion succeeded: update of data, failed: creation of data
+        localService?.deleteCity(cityName: getCityName(with: geocodedCity)) { [weak self] result in
+            if case .failure(_) = result {
+                print("La ville de \(cityName) n'existe pas")
+            } else {
+                print("Mise à jour des données météo de la ville de \(cityName)")
             }
             
-            print("Mise à jour des données météo de la ville de \(cityName)")
+            print("-> 2.1: Téléchargement des nouvelles données de \(geocodedCity.name)...")
+            self?.networkService?.fetchCurrentCityWeather(lat: geocodedCity.lat, lon: geocodedCity.lon, completion: { [weak self] result in
+                switch result {
+                    case .success(let currentWeather):
+                        print("-> 2.2: Sauvegarde locale des nouvelles données de \(geocodedCity.name)...")
+                        self?.localService?.saveCityWeatherData(geocodedCity: geocodedCity, currentWeather: currentWeather, completion: completion)
+                    case .failure(let error):
+                        completion(.failure(error))
+                }
+            })
         }
-        
-        print("-> 2.1: Téléchargement des nouvelles données de \(geocodedCity.name)...")
-        networkService?.fetchCurrentCityWeather(lat: geocodedCity.lat, lon: geocodedCity.lon, completion: { [weak self] result in
-            switch result {
-                case .success(let currentWeather):
-                    print("-> 2.2: Sauvegarde locale des nouvelles données de \(geocodedCity.name)...")
-                    self?.localService?.saveCityWeatherData(geocodedCity: geocodedCity, currentWeather: currentWeather, completion: completion)
-                case .failure(let error):
-                    completion(.failure(error))
-            }
-        })
     }
     
     // Fetches all cities with their respective data, saved locally

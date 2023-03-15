@@ -49,6 +49,7 @@
 		4BAF0CE429C09A8C0040290F /* OtherWeatherStatsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BAF0CE229C09A8C0040290F /* OtherWeatherStatsTableViewCell.swift */; };
 		4BAF0CE529C09A8C0040290F /* OtherWeatherStatsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4BAF0CE329C09A8C0040290F /* OtherWeatherStatsTableViewCell.xib */; };
 		4BAF0CE729C0B1BF0040290F /* DetailViewCellFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BAF0CE629C0B1BF0040290F /* DetailViewCellFactory.swift */; };
+		4BC02F8829C2218A003C07F4 /* ListInteractorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BC02F8729C2218A003C07F4 /* ListInteractorTests.swift */; };
 		4BEEA77C29BF4E5700B6F6BC /* AddProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BEEA77B29BF4E5700B6F6BC /* AddProtocols.swift */; };
 		4BEEA78029BF4EAD00B6F6BC /* AddPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BEEA77F29BF4EAD00B6F6BC /* AddPresenter.swift */; };
 		4BEEA78229BF4EB500B6F6BC /* AddRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BEEA78129BF4EB500B6F6BC /* AddRouter.swift */; };
@@ -140,6 +141,7 @@
 		4BAF0CE229C09A8C0040290F /* OtherWeatherStatsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtherWeatherStatsTableViewCell.swift; sourceTree = "<group>"; };
 		4BAF0CE329C09A8C0040290F /* OtherWeatherStatsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OtherWeatherStatsTableViewCell.xib; sourceTree = "<group>"; };
 		4BAF0CE629C0B1BF0040290F /* DetailViewCellFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewCellFactory.swift; sourceTree = "<group>"; };
+		4BC02F8729C2218A003C07F4 /* ListInteractorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListInteractorTests.swift; sourceTree = "<group>"; };
 		4BE1F0A529BA4B22005CD49D /* MeteoWeatherData.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = MeteoWeatherData.xcodeproj; path = ../Framework/MeteoWeatherData/MeteoWeatherData.xcodeproj; sourceTree = "<group>"; };
 		4BEEA77B29BF4E5700B6F6BC /* AddProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProtocols.swift; sourceTree = "<group>"; };
 		4BEEA77F29BF4EAD00B6F6BC /* AddPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPresenter.swift; sourceTree = "<group>"; };
@@ -276,6 +278,7 @@
 			children = (
 				4B64129E29C1C14600915DD9 /* ListDisplayLogicMock.swift */,
 				4B2C181F29C0F6C700745E99 /* ListPresenterTests.swift */,
+				4BC02F8729C2218A003C07F4 /* ListInteractorTests.swift */,
 			);
 			path = List;
 			sourceTree = "<group>";
@@ -507,6 +510,7 @@
 				4B6412AB29C1CF6100915DD9 /* AddDisplayLogicMock.swift in Sources */,
 				4B2C182029C0F6C700745E99 /* ListPresenterTests.swift in Sources */,
 				4B64129F29C1C14600915DD9 /* ListDisplayLogicMock.swift in Sources */,
+				4BC02F8829C2218A003C07F4 /* ListInteractorTests.swift in Sources */,
 				4B6412AE29C1D1B600915DD9 /* CitySearchOutputDataMock.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
