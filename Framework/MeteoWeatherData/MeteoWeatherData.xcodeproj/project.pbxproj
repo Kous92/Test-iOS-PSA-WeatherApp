@@ -131,7 +131,6 @@
 				4BF9FA3C29BBAF0700436510 /* LocalService */,
 				4B9FEBF729BB3919004EA2A0 /* NetworkService */,
 				4B94A70F29BD04180041E78D /* DataRepository */,
-				4BC02F8629C2212B003C07F4 /* TestMocks */,
 			);
 			path = MeteoWeatherData;
 			sourceTree = "<group>";
@@ -185,13 +184,6 @@
 				4B9FEBFA29BB3C85004EA2A0 /* MeteoWeatherDataNetworkAPIService.swift */,
 			);
 			path = NetworkService;
-			sourceTree = "<group>";
-		};
-		4BC02F8629C2212B003C07F4 /* TestMocks */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = TestMocks;
 			sourceTree = "<group>";
 		};
 		4BE2473329C2120D00B2F4F6 /* NetworkService */ = {

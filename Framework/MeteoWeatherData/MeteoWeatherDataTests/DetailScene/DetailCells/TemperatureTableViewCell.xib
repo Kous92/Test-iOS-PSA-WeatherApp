@@ -82,8 +82,8 @@
                                             </stackView>
                                         </subviews>
                                     </stackView>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cloud.rain.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="3Ox-T7-qSx">
-                                        <rect key="frame" x="283" y="-0.33333333333333215" width="40" height="63"/>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="thermometer" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="3Ox-T7-qSx">
+                                        <rect key="frame" x="283" y="-3.5527136788005009e-15" width="40" height="62.333333333333329"/>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="40" id="AcW-ry-1Vy"/>
@@ -127,6 +127,6 @@
     <resources>
         <image name="arrow.down" catalog="system" width="118" height="128"/>
         <image name="arrow.up" catalog="system" width="118" height="128"/>
-        <image name="cloud.rain.fill" catalog="system" width="126" height="128"/>
+        <image name="thermometer" catalog="system" width="80" height="128"/>
     </resources>
 </document>
