@@ -54,6 +54,29 @@ struct CityCurrentWeatherOutput {
         self.lastUpdateTime = Int(city.lastUpdateTime)
     }
     
+    init(with city: CityCurrentWeatherLocalEntity) {
+        self.name = city.name
+        self.country = city.country
+        self.weatherIcon = city.weatherIcon
+        self.weatherDescription = city.weatherDescription
+        self.temperature = city.temperature
+        self.feelsLike = city.feelsLike
+        self.tempMin = city.tempMin
+        self.tempMax = city.tempMax
+        self.lon = city.lon
+        self.lat = city.lat
+        self.sunset = Int(city.sunset)
+        self.sunrise = Int(city.sunrise)
+        self.pressure = Int(city.pressure)
+        self.humidity = Int(city.humidity)
+        self.cloudiness = Int(city.cloudiness)
+        self.windSpeed = city.windSpeed
+        self.windGust = city.windGust
+        self.oneHourRain = city.oneHourRain
+        self.oneHourSnow = city.oneHourSnow
+        self.lastUpdateTime = Int(city.lastUpdateTime)
+    }
+    
     init(name: String, country: String, weatherIcon: String, weatherDescription: String, temperature: Double, feelsLike: Double, tempMin: Double, tempMax: Double, lon: Double, lat: Double, sunset: Int, sunrise: Int, pressure: Int, humidity: Int, cloudiness: Int, windSpeed: Double, windGust: Double, oneHourRain: Double, oneHourSnow: Double, lastUpdateTime: Int) {
         self.name = name
         self.country = country

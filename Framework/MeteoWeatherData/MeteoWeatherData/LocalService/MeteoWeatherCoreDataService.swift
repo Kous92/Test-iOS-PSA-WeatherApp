@@ -10,7 +10,6 @@ import CoreData
 
 /// This class manages the Core Data local database service for data persistence, for retrieving, saving, updating and deleting data.
 public class MeteoWeatherCoreDataService: MeteoWeatherLocalService {
-    
     /// The shared singleton object
     public static let shared = MeteoWeatherCoreDataService()
     
@@ -63,7 +62,7 @@ public class MeteoWeatherCoreDataService: MeteoWeatherLocalService {
     ///
     /// `-999` are default values if data was not available from the network API for temperatures.
     /// `-1` are default values if data was not available from the network API for others.
-    public func saveCityWeatherData(geocodedCity: GeocodedCity, currentWeather: CityCurrentWeather, completion: @escaping (Result<CityCurrentWeatherEntity, MeteoWeatherDataError>) -> ()) {
+    public func saveCityWeatherData(geocodedCity: GeocodedCity, currentWeather: CityCurrentWeather, completion: @escaping (Result<CityCurrentWeatherLocalEntity, MeteoWeatherDataError>) -> ()) {
         self.persistentContainer?.performBackgroundTask { (context) in
             context.automaticallyMergesChangesFromParent = true
             
@@ -89,11 +88,14 @@ public class MeteoWeatherCoreDataService: MeteoWeatherLocalService {
             cityCurrentWeatherEntity.weatherIcon = currentWeather.weather?[0].icon
             cityCurrentWeatherEntity.lastUpdateTime = Int64(currentWeather.dt ?? -1)
             
+            let localEntity = CityCurrentWeatherLocalEntity(with: geocodedCity, currentWeather: currentWeather)
+            
             self.saveData(operationDescription: "Sauvegarde de la météo de la ville de \(geocodedCity.name)", context: context) { result in
                 switch result {
                     case .success():
                         print(cityCurrentWeatherEntity)
-                        completion(.success(cityCurrentWeatherEntity))
+                        print(localEntity)
+                        completion(.success(localEntity))
                     case .failure(let error):
                         completion(.failure(error))
                 }
@@ -117,11 +119,12 @@ public class MeteoWeatherCoreDataService: MeteoWeatherLocalService {
             completion(.failure(.localDatabaseSavingError))
         }
     }
-
+    
+    /*
     /// Checks if an entity is already saved in the Core Data local database, to avoid any conflict during saving, updating or deleting operation.
     /// - Parameter name: The location of the weather entity, as filter (ex: Paris, Roma, London,...)
     /// - Returns: The entity if found, or `nil` if not
-    public func checkSavedCity(with name: String) -> CityCurrentWeatherEntity? {
+    public func checkSavedCity(with name: String) -> CityCurrentWeatherLocalEntity? {
         let filterPredicate = NSPredicate(format: "name LIKE[c] %@", name)
         cityFetchRequest.predicate = filterPredicate
         cityFetchRequest.fetchLimit = 1
@@ -136,6 +139,33 @@ public class MeteoWeatherCoreDataService: MeteoWeatherLocalService {
         do {
             let output = try context.fetch(cityFetchRequest)
             print("[MeteoWeatherCoreDataService] ✅ Terminé. \(name) \(output.count > 0 ? "existe" : "n'existe pas")")
+            
+            return output.count > 0 ? CityCurrentWeatherLocalEntity(entity: output[0]) : nil
+        } catch {
+            fatalError("[MeteoWeatherCoreDataService] ❌ Erreur: \(error)")
+        }
+    }
+     */
+    
+    /// Checks if an entity is already saved in the Core Data local database, to avoid any conflict during saving, updating or deleting operation.
+    /// - Parameter name: The location of the weather entity, as filter (ex: Paris, Roma, London,...)
+    /// - Returns: The entity if found, or `nil` if not
+    private func checkSavedCity(with name: String) -> CityCurrentWeatherEntity? {
+        let filterPredicate = NSPredicate(format: "name LIKE[c] %@", name)
+        cityFetchRequest.predicate = filterPredicate
+        cityFetchRequest.fetchLimit = 1
+        
+        print("[MeteoWeatherCoreDataService] ✅ Vérification de l'existence de \(name).")
+        
+        guard let context = persistentContainer?.viewContext else {
+            print("[MeteoWeatherCoreDataService] ❌Contexte indisponible.")
+            fatalError("[MeteoWeatherCoreDataService] ❌ Contexte indisponible.")
+        }
+        
+        do {
+            let output = try context.fetch(cityFetchRequest)
+            print("[MeteoWeatherCoreDataService] ✅ Terminé. \(name) \(output.count > 0 ? "existe" : "n'existe pas")")
+            
             return output.count > 0 ? output[0] : nil
         } catch {
             fatalError("[MeteoWeatherCoreDataService] ❌ Erreur: \(error)")
@@ -144,7 +174,7 @@ public class MeteoWeatherCoreDataService: MeteoWeatherLocalService {
     
     /// Retrieves all locations current weather data saved in the Core Data local database
     /// - Parameter completion: Closure to handle the result with retrived saved entities if succeeded, or an error if failed.
-    public func fetchAllCities(completion: @escaping (Result<[CityCurrentWeatherEntity], MeteoWeatherDataError>) -> ()) {
+    public func fetchAllCities(completion: @escaping (Result<[CityCurrentWeatherLocalEntity], MeteoWeatherDataError>) -> ()) {
         guard let context = persistentContainer?.viewContext else {
             print("[MeteoWeatherCoreDataService] ❌ Erreur lors de la récupération des données de météo. Contexte indisponible.")
             completion(.failure(.localDatabaseError))
@@ -156,7 +186,9 @@ public class MeteoWeatherCoreDataService: MeteoWeatherLocalService {
         do {
             let cities = try context.fetch(fetchRequest)
             print("[MeteoWeatherCoreDataService] ✅ Chargement des villes terminée.")
-            completion(.success(cities))
+            
+            let localCities = cities.map { CityCurrentWeatherLocalEntity(entity: $0) }
+            completion(.success(localCities))
         } catch let fetchError {
             print("[MeteoWeatherCoreDataService] ❌ Erreur lors de la récupération des données de météo: \(fetchError)")
             completion(.failure(.localDatabaseFetchError))
@@ -167,15 +199,47 @@ public class MeteoWeatherCoreDataService: MeteoWeatherLocalService {
     /// - Parameters:
     ///   - city: The entity with full weather data to delete,
     ///   - completion: Closure to handle the result with if deletion has succeeded, or an error if failed.
-    public func deleteCity(city: CityCurrentWeatherEntity, completion: @escaping (Result<Void, MeteoWeatherDataError>) -> ()) {
+    public func deleteCity(cityName: String, completion: @escaping (Result<Void, MeteoWeatherDataError>) -> ()) {
+        // Retrieve the existing entity
+        guard let cityToDelete = checkSavedCity(with: cityName) else {
+            print("La ville de \(cityName) n'existe pas dans la base de données")
+            completion(.failure(.localDatabaseDeleteError))
+            return
+        }
+        
+        print("La ville de \(cityToDelete.name ?? "??") sera supprimée")
+        
         guard let context = persistentContainer?.viewContext else {
             print("[MeteoWeatherCoreDataService] ❌ Erreur lors de la récupération du contexte.")
             completion(.failure(.localDatabaseFetchError))
             return
         }
         
-        print("[MeteoWeatherCoreDataService] Suppression de \(city.name ?? "??")...")
-        context.delete(city)
-        saveData(operationDescription: "Suppression de \(city.name ?? "??")", context: context, completion: completion)
+        print("[MeteoWeatherCoreDataService] Suppression de \(cityToDelete.name ?? "??")...")
+        context.delete(cityToDelete)
+        saveData(operationDescription: "Suppression de \(cityToDelete.name ?? "??")", context: context, completion: completion)
     }
+    
+    /*
+    public func deleteCity(city: CityCurrentWeatherLocalEntity, completion: @escaping (Result<Void, MeteoWeatherDataError>) -> ()) {
+        // Retrieve the existing entity
+        guard let cityToDelete = checkSavedCity(with: city.name) else {
+            print("La ville de \(city.name) n'existe pas dans la base de données")
+            completion(.failure(.localDatabaseDeleteError))
+            return
+        }
+        
+        print("La ville de \(cityToDelete.name ?? "??") sera supprimée")
+        
+        guard let context = persistentContainer?.viewContext else {
+            print("[MeteoWeatherCoreDataService] ❌ Erreur lors de la récupération du contexte.")
+            completion(.failure(.localDatabaseFetchError))
+            return
+        }
+        
+        print("[MeteoWeatherCoreDataService] Suppression de \(cityToDelete.name ?? "??")...")
+        context.delete(cityToDelete)
+        saveData(operationDescription: "Suppression de \(cityToDelete.name ?? "??")", context: context, completion: completion)
+    }
+     */
 }
